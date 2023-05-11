@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styles from "@/styles/Login.module.css";
+import axios from "axios";
 
 const SignupForm = () => {
   const [signinDetails, setSigninDetails] = useState({
@@ -9,6 +10,8 @@ const SignupForm = () => {
     confirmPassword: "",
   });
   const [pic, setPic] = useState(null);
+  const [formErrors, setFormErrors] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,10 +20,55 @@ const SignupForm = () => {
     });
   };
 
-  const postDetails = (pics) => {};
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    // Prevent default form behaviour
     e.preventDefault();
+
+    // Form Validation
+    const errors = {};
+    const regex =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (!signinDetails.name) {
+      errors.name = "Please add your full names.";
+    }
+    if (!signinDetails.email) {
+      errors.email = "Please add your email.";
+    } else if (!regex.test(signinDetails.email)) {
+      errors.email = "Please enter a valid email address";
+    }
+    if (!signinDetails.password) {
+      errors.password = "Please add your password.";
+    }
+    if (!signinDetails.confirmPassword) {
+      errors.confirmPassword = "Please confirm your password.";
+    }
+    if (signinDetails.password !== signinDetails.confirmPassword) {
+      errors.confirmPassword = "These passwords do not match";
+    }
+    setFormErrors(errors);
+
+    // Form data creation and submission
+    if (Object.keys(errors).length === 0) {
+      setLoading(true);
+      const formData = new FormData();
+      if (pic) {
+        formData.append("pic", pic);
+      }
+      for (const key in signinDetails) {
+        formData.append(key, signinDetails[key]);
+      }
+      try {
+        const response = await axios.post(
+          "http://localhost:3000/api/user/register",
+          formData
+        );
+        alert(response.data.message);
+        setLoading(false);
+      } catch (error) {
+        alert(error.response.data);
+        setLoading(false);
+      }
+    }
   };
 
   return (
@@ -28,6 +76,7 @@ const SignupForm = () => {
       <div className={styles.input_container}>
         <label>Name:</label>
         <input
+          className={`${formErrors.name && styles.input_error}`}
           name="name"
           type="text"
           placeholder="Enter your full names here"
@@ -35,10 +84,12 @@ const SignupForm = () => {
           value={signinDetails.name}
           onChange={handleChange}
         />
+        <span className={styles.form_error}>{formErrors.name}</span>
       </div>
       <div className={styles.input_container}>
         <label>Email:</label>
         <input
+          className={`${formErrors.email && styles.input_error}`}
           name="email"
           type="email"
           placeholder="Enter your email address here"
@@ -46,10 +97,12 @@ const SignupForm = () => {
           value={signinDetails.email}
           onChange={handleChange}
         />
+        <span className={styles.form_error}>{formErrors.email}</span>
       </div>
       <div className={styles.input_container}>
         <label>Password:</label>
         <input
+          className={`${formErrors.password && styles.input_error}`}
           name="password"
           type="password"
           placeholder="Enter your password here"
@@ -57,10 +110,12 @@ const SignupForm = () => {
           value={signinDetails.password}
           onChange={handleChange}
         />
+        <span className={styles.form_error}>{formErrors.password}</span>
       </div>
       <div className={styles.input_container}>
         <label>Confirm password:</label>
         <input
+          className={`${formErrors.confirmPassword && styles.input_error}`}
           name="confirmPassword"
           type="password"
           placeholder="Confirm your password"
@@ -68,13 +123,14 @@ const SignupForm = () => {
           value={signinDetails.confirmPassword}
           onChange={handleChange}
         />
+        <span className={styles.form_error}>{formErrors.confirmPassword}</span>
       </div>
       <div className={styles.input_container}>
         <label>Upload your profile picture:</label>
         <input
           type={"file"}
           accept={"image/*"}
-          onChange={(e) => postDetails(e.target.files[0])}
+          onChange={(e) => setPic(e.target.files[0])}
         />
       </div>
       <button
@@ -82,7 +138,7 @@ const SignupForm = () => {
         className={styles.form_button}
         onClick={handleSubmit}
       >
-        Sign Up
+        {loading ? "Loading..." : "Sign Up"}
       </button>
     </form>
   );

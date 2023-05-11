@@ -6,9 +6,9 @@ const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
 const next = require("next");
+
 const app = next({ dev });
 const handle = app.getRequestHandler();
-
 const server = express();
 
 server.use(express.urlencoded({ extended: true }));
@@ -25,6 +25,9 @@ server.use(
 );
 
 dbConnect();
+require("./config/cloudinaryConfig");
+
+server.use("/api/user", require("./routes/userRoutes"));
 
 app.prepare().then(() => {
   server.all("*", (req, res) => {
