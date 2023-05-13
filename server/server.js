@@ -28,6 +28,7 @@ dbConnect();
 require("./config/cloudinaryConfig");
 
 server.use("/api/user", require("./routes/userRoutes"));
+server.use("/api/chats", require("./routes/chatRoutes"));
 
 app.prepare().then(() => {
   server.all("*", (req, res) => {
