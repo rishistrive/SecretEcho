@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import styles from "@/styles/Login.module.css";
 import axios from "axios";
+import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { setUser, setToken } from "@/redux";
 
 const SignupForm = () => {
+  const router = useRouter();
+  const dispatch = useDispatch();
   const [signinDetails, setSigninDetails] = useState({
     name: "",
     email: "",
@@ -63,7 +68,10 @@ const SignupForm = () => {
           formData
         );
         alert(response.data.message);
+        dispatch(setUser({user: response.data.user}));
+        dispatch(setToken({token: response.data.token}));
         setLoading(false);
+        router.push("/");
       } catch (error) {
         alert(error.response.data);
         setLoading(false);
