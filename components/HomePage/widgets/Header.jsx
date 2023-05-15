@@ -8,25 +8,23 @@ import {
   Menu,
   MenuItem,
 } from "@mui/material";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useSelector, useDispatch } from "react-redux";
 import { setUser, setToken } from "@/redux";
 import ProfileModal from "./ProfileModal";
+import SearchDialog from "./SearchDialog";
 
-const SideDrawer = () => {
+const Header = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  const [search, setSearch] = useState("");
-  const [searchResult, setSearchResult] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [loadingChat, setLoadingChat] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorEl2, setAnchorEl2] = useState(null);
   const open = Boolean(anchorEl);
   const open2 = Boolean(anchorEl2);
   const [openModal, setOpenModal] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -45,11 +43,18 @@ const SideDrawer = () => {
   };
 
   return (
-    <div className={styles.side_drawer}>
-      <button className={styles.search_button}>
+    <div className={styles.header}>
+      <button
+        className={styles.search_button}
+        onClick={() => setOpenDialog(true)}
+      >
         <i className="fa-solid fa-magnifying-glass"></i>
         <span className={styles.search_text}>Search User</span>
       </button>
+      <SearchDialog
+        openDialog={openDialog}
+        handleClose={() => setOpenDialog(false)}
+      />
       <span className={styles.app_title}>Chit Chat</span>
       <div className={styles.menu_buttons_container}>
         <IconButton
@@ -98,4 +103,4 @@ const SideDrawer = () => {
   );
 };
 
-export default SideDrawer;
+export default Header;

@@ -76,8 +76,11 @@
   cursor: pointer;
 }
 .form_button:hover {
-  scale: 1.03;
+  transform: scale(1.03);
   background-color: #3f86cc;
+}
+.form_button:active {
+  transform: scale(0.99);
 }
 .input_error {
   border: 1px solid red !important;
