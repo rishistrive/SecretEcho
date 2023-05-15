@@ -1,6 +1,7 @@
 .home_page {
   width: 100%;
 }
+
 .chats_chatbox_container {
   display: flex;
   justify-content: space-between;
@@ -17,22 +18,27 @@
   padding: 5px 10px;
   border: solid 5px #eef1f8;
 }
+
 .search_text {
   padding: 0 2rem;
 }
+
 .search_button {
   border: none;
   background-color: white;
   border-radius: 4px;
   padding: 9px;
 }
+
 .search_button:hover {
   background-color: #eef1f8;
 }
+
 .app_title {
   font-family: "Anton", sans-serif;
   font-size: 30px;
 }
+
 .menu_buttons_container {
   display: flex;
   gap: 0;
