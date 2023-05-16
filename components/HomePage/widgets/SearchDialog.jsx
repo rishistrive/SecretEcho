@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import styles from "@/styles/Home.module.css";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { setCurrentChat } from "@/redux";
+import { setCurrentChat, setChats } from "@/redux";
 import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
 import UserListItem from "./UserListItem";
@@ -11,6 +11,7 @@ import UserListItem from "./UserListItem";
 const SearchDialog = ({ openDialog, handleClose }) => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.token);
+  const chats = useSelector((state) => state.chats);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [searchResult, setSearchResult] = useState([]);
@@ -40,6 +41,9 @@ const SearchDialog = ({ openDialog, handleClose }) => {
         { headers: { Authorization: `Bearer ${token}` } }
       );
       dispatch(setCurrentChat({ currentChat: data }));
+      !chats.find((item) => {
+        return JSON.stringify(item) === JSON.stringify(data);
+      }) && dispatch(setChats({ chats: [data, ...chats] }));
       handleClose();
     } catch (error) {
       alert(error.response.data);

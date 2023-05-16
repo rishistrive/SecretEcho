@@ -1,7 +1,68 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setChats, setCurrentChat } from "@/redux";
+import styles from "@/styles/Home.module.css";
+import AddIcon from "@mui/icons-material/Add";
 
 const MyChats = () => {
-  return <div>MyChats</div>;
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.token);
+  const user = useSelector((state) => state.user);
+  const currentChat = useSelector((state) => state.currentChat);
+  const chats = useSelector((state) => state.chats);
+  const [loggedUser, setLoggedUser] = useState(user);
+
+  const fetchChats = async () => {
+    try {
+      const { data } = await axios.get(`http://localhost:3000/api/chats`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      dispatch(setChats({ chats: data }));
+    } catch (error) {
+      alert(error.response.data);
+    }
+  };
+
+  useEffect(() => {
+    fetchChats();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return (
+    <div className={styles.mychats_container}>
+      <div className={styles.mychats_heading}>
+        My Chats
+        <button>
+          <span>New Group Chat</span> <AddIcon />
+        </button>
+      </div>
+      {chats && (
+        <div className={styles.mychats_body}>
+          {chats.map((chat, index) => (
+            <div
+              key={index}
+              className={`${styles.mychats_chat} ${
+                currentChat == chat ? styles.mychats_selectedChat : ""
+              }`}
+              onClick={() => dispatch(setCurrentChat({ currentChat: chat }))}
+            >
+              {!chat.isGroupChat ? (
+                <span>
+                  {
+                    chat.users.filter((user) => user._id !== loggedUser._id)[0]
+                      .name
+                  }
+                </span>
+              ) : (
+                <span>{chat.chatName}</span>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default MyChats;

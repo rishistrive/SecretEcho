@@ -26,5 +26,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { setUser, setToken, setCurrentChat } = authSlice.actions;
+export const { setUser, setToken, setCurrentChat, setChats } = authSlice.actions;
 export default authSlice.reducer;
