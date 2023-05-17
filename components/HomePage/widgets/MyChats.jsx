@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setChats, setCurrentChat } from "@/redux";
 import styles from "@/styles/Home.module.css";
 import AddIcon from "@mui/icons-material/Add";
+import GroupChatDialog from "./GroupChatDialog";
 
 const MyChats = () => {
   const dispatch = useDispatch();
@@ -12,6 +13,14 @@ const MyChats = () => {
   const currentChat = useSelector((state) => state.currentChat);
   const chats = useSelector((state) => state.chats);
   const [loggedUser, setLoggedUser] = useState(user);
+
+  const [open, setOpen] = useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const fetchChats = async () => {
     try {
@@ -33,10 +42,11 @@ const MyChats = () => {
     <div className={styles.mychats_container}>
       <div className={styles.mychats_heading}>
         My Chats
-        <button>
+        <button onClick={handleClickOpen}>
           <span>New Group Chat</span> <AddIcon />
         </button>
       </div>
+      <GroupChatDialog open={open} handleClose={handleClose} />
       {chats && (
         <div className={styles.mychats_body}>
           {chats.map((chat, index) => (

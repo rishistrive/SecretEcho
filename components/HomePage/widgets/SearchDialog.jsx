@@ -31,12 +31,12 @@ const SearchDialog = ({ openDialog, handleClose }) => {
       }
     }
   };
-  const accessChat = async (userId) => {
+  const accessChat = async (user) => {
     try {
       const { data } = await axios.post(
         `http://localhost:3000/api/chats`,
         {
-          userId,
+          userId: user._id,
         },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -79,7 +79,7 @@ const SearchDialog = ({ openDialog, handleClose }) => {
           </Stack>
         ) : (
           searchResult.map((user, index) => (
-            <UserListItem key={index} user={user} accessChat={accessChat} />
+            <UserListItem key={index} user={user} handleFunction={accessChat} />
           ))
         )}
       </div>

@@ -7,7 +7,7 @@
   padding: 10px;
   height: 91.5vh;
 }
-/* SideDrawer Styling */
+/* Header Styling */
 .header {
   display: flex;
   justify-content: space-between;
@@ -149,6 +149,38 @@
   background-color: #38b2ac !important;
   color: white !important;
 }
+
+/* GroupChatDialog styling */
+.groupchat_title {
+  display: flex;
+  justify-content: space-between;
+  gap: 10rem;
+}
+.groupchat_form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.groupchat_form input {
+  margin-bottom: 10px;
+  border: none;
+  border-bottom: solid 1px;
+  outline: none;
+  font-size: 17px;
+}
+.selectedUser_badge {
+  padding: 10px;
+  border-radius: 10px;
+  margin: 10px;
+  background-color: purple;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
 /* ChatBox styling */
 .chatbox_container {
   flex: 1.5;
