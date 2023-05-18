@@ -10,15 +10,45 @@ import {
   IconButton,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setCurrentChat, setChats } from "@/redux";
 import styles from "../../../styles/Home.module.css";
+import axios from "axios";
 
 const UpdateGroupChatModal = ({ open, handleClose }) => {
+  const dispatch = useDispatch();
   const selectedChat = useSelector((state) => state.currentChat);
   const loggedUser = useSelector((state) => state.user);
+  const token = useSelector((state) => state.token);
   const [groupChatName, setGroupChatName] = useState("");
   const [search, setSearch] = useState("");
   const [searchResult, setSearchResult] = useState([]);
+
+  const handleRename = async () => {
+    if (!groupChatName) {
+      return;
+    }
+    try {
+      const { data } = await axios.put(
+        `http://localhost:3000/api/chats/group/rename`,
+        { chatId: selectedChat._id, chatName: groupChatName },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      dispatch(setCurrentChat({ currentChat: data }));
+      const response = await axios.get(`http://localhost:3000/api/chats`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      dispatch(setChats({ chats: response.data }));
+      setGroupChatName("");
+    } catch (error) {
+      console.log(error);
+      alert(error.response.data);
+    }
+  };
 
   return (
     <Dialog open={open} onClose={handleClose}>
@@ -53,7 +83,11 @@ const UpdateGroupChatModal = ({ open, handleClose }) => {
             value={groupChatName}
             onChange={(e) => setGroupChatName(e.target.value)}
           />
-          <Button variant={"contained"} sx={{ backgroundColor: "#309798" }}>
+          <Button
+            variant={"contained"}
+            sx={{ backgroundColor: "#309798" }}
+            onClick={handleRename}
+          >
             Update
           </Button>
         </div>
