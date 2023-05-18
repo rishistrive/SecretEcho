@@ -199,7 +199,7 @@ const UpdateGroupChatModal = ({ open, handleClose }) => {
         <div className={styles.groupchat_form_row}>
           <input
             type="text"
-            placeholder="Enter chat name"
+            placeholder="Rename group chat"
             value={groupChatName}
             onChange={(e) => setGroupChatName(e.target.value)}
           />
