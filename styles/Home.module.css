@@ -214,3 +214,36 @@
   align-items: center;
   justify-content: space-between;
 }
+.select_chat_messages {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 12px;
+  background-color: #e8e8e8;
+  width: 96%;
+  height: 100%;
+  border-radius: 10px;
+  overflow-y: hidden;
+}
+
+/* UpdateGroupChat Modal styles */
+.updateGroup_heading {
+  font-size: 35px;
+  font-family: "Work Sans";
+  display: flex;
+  justify-content: center;
+}
+.groupchat_form_row {
+  display: flex;
+  justify-content: space-between;
+  margin: 13px 0 0px;
+  gap: 15px;
+}
+.groupchat_form_row input {
+  border-radius: 8px;
+  border: solid 1px #8d8c8c;
+  font-size: 18px;
+  outline: none;
+  flex: 1 1;
+  padding: 8px 9px;
+}

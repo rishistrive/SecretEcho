@@ -11,7 +11,7 @@ import {
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useSelector, useDispatch } from "react-redux";
-import { setUser, setToken } from "@/redux";
+import { setLogout } from "@/redux";
 import ProfileModal from "./ProfileModal";
 import SearchDialog from "./SearchDialog";
 
@@ -38,8 +38,7 @@ const Header = () => {
     setAnchorEl2(null);
   };
   const handleLogout = () => {
-    dispatch(setUser({ user: null }));
-    dispatch(setToken({ token: null }));
+    dispatch(setLogout());
   };
 
   return (
