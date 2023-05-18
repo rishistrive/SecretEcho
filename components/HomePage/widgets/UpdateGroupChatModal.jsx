@@ -111,6 +111,62 @@ const UpdateGroupChatModal = ({ open, handleClose }) => {
     }
   };
 
+  const removeUser = async (user) => {
+    if (loggedUser._id === user._id) {
+      return;
+    }
+    try {
+      const { data } = await axios.put(
+        `http://localhost:3000/api/chats/group/remove`,
+        {
+          chatId: selectedChat._id,
+          userId: user._id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      dispatch(setCurrentChat({ currentChat: data }));
+      const response = await axios.get(`http://localhost:3000/api/chats`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      dispatch(setChats({ chats: response.data }));
+    } catch (error) {
+      alert(error.response.data);
+    }
+  };
+
+  const leaveGroup = async () => {
+    if (selectedChat.groupAdmin._id === loggedUser._id) {
+      alert("Group admin cannot leave group");
+      return;
+    }
+    try {
+      const { data } = await axios.put(
+        `http://localhost:3000/api/chats/group/remove`,
+        {
+          chatId: selectedChat._id,
+          userId: loggedUser._id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      dispatch(setCurrentChat({ currentChat: null }));
+      const response = await axios.get(`http://localhost:3000/api/chats`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      dispatch(setChats({ chats: response.data }));
+      handleClose();
+    } catch (error) {
+      alert(error.response.data);
+    }
+  };
+
   return (
     <Dialog open={open} onClose={handleClose}>
       <DialogTitle>
@@ -130,7 +186,7 @@ const UpdateGroupChatModal = ({ open, handleClose }) => {
                     selectedChat.groupAdmin._id === loggedUser._id && (
                       <IconButton
                         sx={{ height: "1px", width: "1px", color: "white" }}
-                        onClick={() => {}}
+                        onClick={() => removeUser(selectedUser)}
                       >
                         <CloseIcon />
                       </IconButton>
@@ -175,7 +231,7 @@ const UpdateGroupChatModal = ({ open, handleClose }) => {
         ))}
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} variant="contained" color={"error"}>
+        <Button onClick={leaveGroup} variant="contained" color={"error"}>
           Leave Group
         </Button>
       </DialogActions>
