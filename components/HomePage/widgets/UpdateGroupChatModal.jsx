@@ -14,6 +14,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setCurrentChat, setChats } from "@/redux";
 import styles from "../../../styles/Home.module.css";
 import axios from "axios";
+import UserListItem from "./UserListItem";
 
 const UpdateGroupChatModal = ({ open, handleClose }) => {
   const dispatch = useDispatch();
@@ -50,6 +51,66 @@ const UpdateGroupChatModal = ({ open, handleClose }) => {
     }
   };
 
+  const handleSearch = async (query) => {
+    if (!query) {
+      setSearchResult([]);
+      return;
+    }
+    try {
+      const { data } = await axios.get(
+        `http://localhost:3000/api/user?search=${query}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setSearchResult(data);
+    } catch (error) {
+      alert(error.response.data);
+    }
+  };
+
+  const handleSearchChange = async (e) => {
+    setSearch(e.target.value);
+    handleSearch(e.target.value);
+  };
+
+  const handleAddUser = async (user) => {
+    delete user.password;
+    if (
+      selectedChat.users.find(
+        (item) => JSON.stringify(item) === JSON.stringify(user)
+      )
+    ) {
+      alert("User already exists in the group");
+      return;
+    }
+    try {
+      const { data } = await axios.put(
+        `http://localhost:3000/api/chats/group/add`,
+        {
+          chatId: selectedChat._id,
+          userId: user._id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      dispatch(setCurrentChat({ currentChat: data }));
+      const response = await axios.get(`http://localhost:3000/api/chats`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      dispatch(setChats({ chats: response.data }));
+      setSearch("");
+      setSearchResult([]);
+    } catch (error) {
+      alert(error.response.data);
+    }
+  };
+
   return (
     <Dialog open={open} onClose={handleClose}>
       <DialogTitle>
@@ -65,12 +126,15 @@ const UpdateGroupChatModal = ({ open, handleClose }) => {
               <Grid key={index} item xs={3}>
                 <div className={styles.selectedUser_badge}>
                   <span>{selectedUser.name.split(" ")[0]}</span>
-                  <IconButton
-                    sx={{ height: "1px", width: "1px", color: "white" }}
-                    onClick={() => {}}
-                  >
-                    <CloseIcon />
-                  </IconButton>
+                  {selectedChat.isGroupChat &&
+                    selectedChat.groupAdmin._id === loggedUser._id && (
+                      <IconButton
+                        sx={{ height: "1px", width: "1px", color: "white" }}
+                        onClick={() => {}}
+                      >
+                        <CloseIcon />
+                      </IconButton>
+                    )}
                 </div>
               </Grid>
             );
@@ -91,14 +155,24 @@ const UpdateGroupChatModal = ({ open, handleClose }) => {
             Update
           </Button>
         </div>
-        <div className={styles.groupchat_form_row}>
-          <input
-            type="text"
-            placeholder="Add user to group"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
+        {selectedChat.isGroupChat &&
+          selectedChat.groupAdmin._id === loggedUser._id && (
+            <div className={styles.groupchat_form_row}>
+              <input
+                type="text"
+                placeholder="Add user to group"
+                value={search}
+                onChange={handleSearchChange}
+              />
+            </div>
+          )}
+        {searchResult.slice(0, 4).map((user, index) => (
+          <UserListItem
+            key={index}
+            user={user}
+            handleFunction={handleAddUser}
           />
-        </div>
+        ))}
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} variant="contained" color={"error"}>

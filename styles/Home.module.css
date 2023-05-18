@@ -236,7 +236,7 @@
 .groupchat_form_row {
   display: flex;
   justify-content: space-between;
-  margin: 13px 0 0px;
+  margin: 20px 0;
   gap: 15px;
 }
 .groupchat_form_row input {
