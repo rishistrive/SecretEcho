@@ -7,14 +7,38 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ProfileModal from "./ProfileModal";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import UpdateGroupChatModal from "./UpdateGroupChatModal";
+import SendIcon from "@mui/icons-material/Send";
+import axios from "axios";
 
 const SingleChat = () => {
   const dispatch = useDispatch();
   const selectedChat = useSelector((state) => state.currentChat);
   const loggedUser = useSelector((state) => state.user);
+  const token = useSelector((state) => state.token);
   const [openModal, setOpenModal] = useState(false);
   const [openModal2, setOpenModal2] = useState(false);
   const [chatSender, setChatSender] = useState(null);
+  const [messages, setMessages] = useState([]);
+  const [newMessage, setNewMessage] = useState("");
+
+  const handleSubmit = async () => {
+    if (!newMessage) return;
+    try {
+      const { data } = await axios.post(
+        `http://localhost:3000/api/messages`,
+        {
+          content: newMessage,
+          chatId: selectedChat._id,
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      console.log(data);
+      setNewMessage("");
+    } catch (error) {
+      alert(error.response.data);
+    }
+  };
+
   useEffect(() => {
     if (selectedChat) {
       setChatSender(
@@ -63,7 +87,19 @@ const SingleChat = () => {
               handleClose={() => setOpenModal2(false)}
             />
           </div>
-          <div className={styles.select_chat_messages}></div>
+          <div className={styles.select_chat_messagesBody}>
+            <div className={styles.select_chat_messages}>Messages</div>
+            <div className={styles.select_chat_sendMessage}>
+              <input
+                type="text"
+                placeholder="Enter message here"
+                onChange={(e) => setNewMessage(e.target.value)}
+              />
+              <button onClick={handleSubmit}>
+                <SendIcon />
+              </button>
+            </div>
+          </div>
         </>
       ) : (
         <div className={styles.select_chat_message}>
