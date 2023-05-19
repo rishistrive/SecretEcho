@@ -30,6 +30,7 @@ require("./config/cloudinaryConfig");
 
 server.use("/api/user", require("./routes/userRoutes"));
 server.use("/api/chats", require("./routes/chatRoutes"));
+server.use("/api/messages", require("./routes/messageRoutes"));
 
 app.prepare().then(() => {
   server.all("*", (req, res) => {
