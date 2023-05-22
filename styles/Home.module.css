@@ -231,6 +231,9 @@
 }
 .select_chat_messages {
   flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .select_chat_sendMessage input {
   flex: 1;

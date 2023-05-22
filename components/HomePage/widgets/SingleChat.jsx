@@ -9,6 +9,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import UpdateGroupChatModal from "./UpdateGroupChatModal";
 import SendIcon from "@mui/icons-material/Send";
 import axios from "axios";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const SingleChat = () => {
   const dispatch = useDispatch();
@@ -20,8 +21,10 @@ const SingleChat = () => {
   const [chatSender, setChatSender] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async () => {
+    setNewMessage("");
     if (!newMessage) return;
     try {
       const { data } = await axios.post(
@@ -33,11 +36,35 @@ const SingleChat = () => {
         { headers: { Authorization: `Bearer ${token}` } }
       );
       console.log(data);
-      setNewMessage("");
     } catch (error) {
       alert(error.response.data);
     }
   };
+
+  const fetchChatMessages = async () => {
+    setLoading(true);
+    try {
+      const { data } = await axios.get(
+        `http://localhost:3000/api/messages/${selectedChat._id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(data);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      alert(error.response.data);
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    selectedChat && fetchChatMessages();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedChat]);
 
   useEffect(() => {
     if (selectedChat) {
@@ -88,11 +115,14 @@ const SingleChat = () => {
             />
           </div>
           <div className={styles.select_chat_messagesBody}>
-            <div className={styles.select_chat_messages}>Messages</div>
+            <div className={styles.select_chat_messages}>
+              {loading && <CircularProgress color={"inherit"} />}
+            </div>
             <div className={styles.select_chat_sendMessage}>
               <input
                 type="text"
                 placeholder="Enter message here"
+                value={newMessage}
                 onChange={(e) => setNewMessage(e.target.value)}
               />
               <button onClick={handleSubmit}>
