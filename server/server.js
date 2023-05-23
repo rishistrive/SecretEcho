@@ -54,7 +54,10 @@ io.on("connection", (socket) => {
   console.log("Connected to socket");
   socket.on("setup", (userData) => {
     socket.join(userData._id);
-    console.log(userData._id);
     socket.emit("connected");
   });
+  socket.on("join chat", (room) => {
+    socket.join(room);
+    console.log("User joined room: " + room);
+  })
 });

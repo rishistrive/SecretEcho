@@ -62,6 +62,7 @@ const SingleChat = () => {
       );
       setMessages(data);
       setLoading(false);
+      socket.emit("join chat", selectedChat._id)
     } catch (error) {
       console.log(error);
       alert(error.response.data);
