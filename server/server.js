@@ -6,6 +6,8 @@ const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
 const next = require("next");
+const { createServer } = require("http");
+const { Server } = require("socket.io");
 
 const app = next({ dev });
 const handle = app.getRequestHandler();
@@ -38,6 +40,13 @@ app.prepare().then(() => {
   });
 });
 
-server.listen(PORT, () => {
+const appServer = server.listen(PORT, () => {
   console.log(`Server is running on PORT: ${PORT}`);
+});
+
+const io = new Server(appServer, {
+  pingTimeout: 60000,
+  cors: {
+    origin: `http://localhost:3000`,
+  },
 });
