@@ -228,12 +228,13 @@
 .select_chat_sendMessage {
   display: flex;
   gap: 12px;
+  margin-top: 15px;
 }
 .select_chat_messages {
   flex: 1;
   display: flex;
-  align-items: center;
   justify-content: center;
+  overflow: auto;
 }
 .select_chat_sendMessage input {
   flex: 1;
@@ -252,6 +253,39 @@
 }
 .select_chat_sendMessage button:active {
   transform: scale(0.95);
+}
+.single_chat_messages {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.single_chat_message {
+  display: flex;
+}
+.single_chat_message_userContainer,
+.single_chat_message_senderContainer {
+  display: flex;
+}
+.single_chat_message_userContainer {
+  justify-content: flex-end;
+  padding: 0 10px;
+}
+.single_chat_message_senderContainer {
+  justify-content: flex-start;
+  padding: 0 10px;
+  gap: 10px;
+}
+.single_chat_message_user {
+  background-color: #bee3f8;
+  padding: 7px 15px;
+  margin: 9px 0 0 0;
+  border-radius: 10px;
+}
+.single_chat_message_sender {
+  background-color: #b9f5d0;
+  padding: 7px 15px;
+  margin: 9px 0 0 0;
+  border-radius: 10px;
 }
 
 /* UpdateGroupChat Modal styles */

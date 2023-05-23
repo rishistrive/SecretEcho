@@ -10,6 +10,7 @@ import UpdateGroupChatModal from "./UpdateGroupChatModal";
 import SendIcon from "@mui/icons-material/Send";
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
+import SingleChatMessages from "./SingleChatMessages";
 
 const SingleChat = () => {
   const dispatch = useDispatch();
@@ -35,7 +36,9 @@ const SingleChat = () => {
         },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      console.log(data);
+      setMessages((prevValue) => {
+        return [...prevValue, data];
+      });
     } catch (error) {
       alert(error.response.data);
     }
@@ -52,7 +55,7 @@ const SingleChat = () => {
           },
         }
       );
-      console.log(data);
+      setMessages(data);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -63,6 +66,7 @@ const SingleChat = () => {
 
   useEffect(() => {
     selectedChat && fetchChatMessages();
+    setNewMessage("");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedChat]);
 
@@ -116,7 +120,11 @@ const SingleChat = () => {
           </div>
           <div className={styles.select_chat_messagesBody}>
             <div className={styles.select_chat_messages}>
-              {loading && <CircularProgress color={"inherit"} />}
+              {loading ? (
+                <CircularProgress color={"inherit"} />
+              ) : (
+                <SingleChatMessages messages={messages} />
+              )}
             </div>
             <div className={styles.select_chat_sendMessage}>
               <input
