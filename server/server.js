@@ -6,7 +6,6 @@ const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
 const next = require("next");
-const { createServer } = require("http");
 const { Server } = require("socket.io");
 
 const app = next({ dev });
@@ -49,4 +48,13 @@ const io = new Server(appServer, {
   cors: {
     origin: `http://localhost:3000`,
   },
+});
+
+io.on("connection", (socket) => {
+  console.log("Connected to socket");
+  socket.on("setup", (userData) => {
+    socket.join(userData._id);
+    console.log(userData._id);
+    socket.emit("connected");
+  });
 });

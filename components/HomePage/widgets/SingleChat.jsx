@@ -11,6 +11,10 @@ import SendIcon from "@mui/icons-material/Send";
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
 import SingleChatMessages from "./SingleChatMessages";
+import { io } from "socket.io-client";
+
+const ENDPOINT = `http://localhost:3000`;
+var socket, selectedChatCompare;
 
 const SingleChat = () => {
   const dispatch = useDispatch();
@@ -23,6 +27,7 @@ const SingleChat = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [socketConnection, setSocketConnection] = useState(false);
 
   const handleSubmit = async () => {
     setNewMessage("");
@@ -80,6 +85,12 @@ const SingleChat = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedChat]);
+
+  useEffect(() => {
+    socket = io(ENDPOINT);
+    socket.emit("setup", loggedUser);
+    socket.on("connection", () => setSocketConnection(true));
+  }, [loggedUser]);
 
   return (
     <>
