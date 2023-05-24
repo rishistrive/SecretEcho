@@ -112,7 +112,7 @@ const SingleChat = () => {
   }, [selectedChat]);
 
   return (
-    <>
+    <div className={styles.chatbox_container}>
       {selectedChat ? (
         <>
           <div className={styles.select_chat_heading}>
@@ -176,7 +176,7 @@ const SingleChat = () => {
           </span>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

@@ -6,6 +6,7 @@ import styles from "@/styles/Home.module.css";
 import Header from "./widgets/Header";
 import MyChats from "./widgets/MyChats";
 import ChatBox from "./widgets/ChatBox";
+import SingleChat from "./widgets/SingleChat";
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -31,7 +32,7 @@ const HomePage = () => {
         <Header />
         <div className={styles.chats_chatbox_container}>
           <MyChats />
-          <ChatBox />
+          <SingleChat />
         </div>
       </div>
     )
