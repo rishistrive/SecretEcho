@@ -3,6 +3,8 @@ import styles from "../../../styles/Home.module.css";
 import { useSelector } from "react-redux";
 import ScrollableFeed from "react-scrollable-feed";
 import Avatar from "@mui/material/Avatar";
+import Lottie from "react-lottie";
+import animationData from "../../animations/typing.json";
 
 const isLastMessage = (message, messages, index) => {
   if (index < messages.length - 1) {
@@ -13,6 +15,14 @@ const isLastMessage = (message, messages, index) => {
 
 const SingleChatMessages = ({ messages, istyping }) => {
   const user = useSelector((state) => state.user);
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
   return (
     <div className={styles.single_chat_messages}>
       <ScrollableFeed>
@@ -47,7 +57,15 @@ const SingleChatMessages = ({ messages, istyping }) => {
             </span>
           );
         })}
-        {istyping && <div>Loading...</div>}
+        {istyping && (
+          <div>
+            <Lottie
+              options={defaultOptions}
+              width={70}
+              style={{ marginBottom: 15, marginLeft: 0 }}
+            />
+          </div>
+        )}
       </ScrollableFeed>
     </div>
   );
