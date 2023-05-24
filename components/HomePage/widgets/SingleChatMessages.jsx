@@ -11,7 +11,7 @@ const isLastMessage = (message, messages, index) => {
   return true;
 };
 
-const SingleChatMessages = ({ messages }) => {
+const SingleChatMessages = ({ messages, istyping }) => {
   const user = useSelector((state) => state.user);
   return (
     <div className={styles.single_chat_messages}>
@@ -47,6 +47,7 @@ const SingleChatMessages = ({ messages }) => {
             </span>
           );
         })}
+        {istyping && <div>Loading...</div>}
       </ScrollableFeed>
     </div>
   );

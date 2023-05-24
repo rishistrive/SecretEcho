@@ -5,7 +5,6 @@ import { setCurrentChat } from "@/redux";
 import styles from "@/styles/Home.module.css";
 import Header from "./widgets/Header";
 import MyChats from "./widgets/MyChats";
-import ChatBox from "./widgets/ChatBox";
 import SingleChat from "./widgets/SingleChat";
 
 const HomePage = () => {

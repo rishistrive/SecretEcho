@@ -28,9 +28,38 @@ const SingleChat = () => {
   const [newMessage, setNewMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [socketConnection, setSocketConnection] = useState(false);
+  const [typing, setTyping] = useState(false);
+  const [istyping, setIsTyping] = useState(false);
+
+  useEffect(() => {
+    socket = io(ENDPOINT);
+    socket.emit("setup", loggedUser);
+    socket.on("connected", () => setSocketConnection(true));
+    socket.on("message received", (newMessageReceived) => {
+      if (
+        !selectedChatCompare ||
+        selectedChatCompare._id !== newMessageReceived.chat._id
+      ) {
+        // give notification
+      } else {
+        console.log("Effect ran.");
+        setMessages((prevValue) => {
+          return [...prevValue, newMessageReceived];
+        });
+      }
+    });
+    socket.on("typing", () => {
+      setIsTyping(true);
+    });
+    socket.on("stop typing", () => {
+      setIsTyping(false);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleSubmit = async () => {
     setNewMessage("");
+    socket.emit("stop typing", selectedChat._id);
     if (!newMessage) return;
     try {
       const { data } = await axios.post(
@@ -72,33 +101,11 @@ const SingleChat = () => {
   };
 
   useEffect(() => {
-    socket = io(ENDPOINT);
-    socket.emit("setup", loggedUser);
-    socket.on("connection", () => setSocketConnection(true));
-  }, [loggedUser]);
-
-  useEffect(() => {
     selectedChat && fetchChatMessages();
     setNewMessage("");
     selectedChatCompare = selectedChat;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedChat]);
-
-  useEffect(() => {
-    socket.on("message received", (newMessageReceived) => {
-      if (
-        !selectedChatCompare ||
-        selectedChatCompare._id !== newMessageReceived.chat._id
-      ) {
-        // give notification
-      } else {
-        console.log("Effect ran.");
-        setMessages((prevValue) => {
-          return [...prevValue, newMessageReceived];
-        });
-      }
-    });
-  }, []);
 
   useEffect(() => {
     if (selectedChat) {
@@ -110,6 +117,25 @@ const SingleChat = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedChat]);
+
+  const handleType = (e) => {
+    setNewMessage(e.target.value);
+    if (!socketConnection) return;
+    if (!typing) {
+      setTyping(true);
+      socket.emit("typing", selectedChat._id);
+    }
+    let lastTypingTime = new Date().getTime();
+    var timerLength = 3000;
+    setTimeout(() => {
+      var timeNow = new Date().getTime();
+      var timeDiff = timeNow - lastTypingTime;
+      if (timeDiff >= timerLength && typing) {
+        socket.emit("stop typing", selectedChat._id);
+        setTyping(false);
+      }
+    }, timerLength);
+  };
 
   return (
     <div className={styles.chatbox_container}>
@@ -153,7 +179,7 @@ const SingleChat = () => {
               {loading ? (
                 <CircularProgress color={"inherit"} />
               ) : (
-                <SingleChatMessages messages={messages} />
+                <SingleChatMessages messages={messages} istyping={istyping} />
               )}
             </div>
             <div className={styles.select_chat_sendMessage}>
@@ -161,7 +187,7 @@ const SingleChat = () => {
                 type="text"
                 placeholder="Enter message here"
                 value={newMessage}
-                onChange={(e) => setNewMessage(e.target.value)}
+                onChange={handleType}
               />
               <button onClick={handleSubmit}>
                 <SendIcon />
