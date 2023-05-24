@@ -44,6 +44,7 @@ const SingleChat = () => {
       setMessages((prevValue) => {
         return [...prevValue, data];
       });
+      socket.emit("new message", data);
     } catch (error) {
       alert(error.response.data);
     }
@@ -62,7 +63,7 @@ const SingleChat = () => {
       );
       setMessages(data);
       setLoading(false);
-      socket.emit("join chat", selectedChat._id)
+      socket.emit("join chat", selectedChat._id);
     } catch (error) {
       console.log(error);
       alert(error.response.data);
@@ -71,10 +72,33 @@ const SingleChat = () => {
   };
 
   useEffect(() => {
+    socket = io(ENDPOINT);
+    socket.emit("setup", loggedUser);
+    socket.on("connection", () => setSocketConnection(true));
+  }, [loggedUser]);
+
+  useEffect(() => {
     selectedChat && fetchChatMessages();
     setNewMessage("");
+    selectedChatCompare = selectedChat;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedChat]);
+
+  useEffect(() => {
+    socket.on("message received", (newMessageReceived) => {
+      if (
+        !selectedChatCompare ||
+        selectedChatCompare._id !== newMessageReceived.chat._id
+      ) {
+        // give notification
+      } else {
+        console.log("Effect ran.");
+        setMessages((prevValue) => {
+          return [...prevValue, newMessageReceived];
+        });
+      }
+    });
+  }, []);
 
   useEffect(() => {
     if (selectedChat) {
@@ -86,12 +110,6 @@ const SingleChat = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedChat]);
-
-  useEffect(() => {
-    socket = io(ENDPOINT);
-    socket.emit("setup", loggedUser);
-    socket.on("connection", () => setSocketConnection(true));
-  }, [loggedUser]);
 
   return (
     <>

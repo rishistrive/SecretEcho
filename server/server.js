@@ -59,5 +59,16 @@ io.on("connection", (socket) => {
   socket.on("join chat", (room) => {
     socket.join(room);
     console.log("User joined room: " + room);
-  })
+  });
+  socket.on("new message", (newMesssageReceived) => {
+    var chat = newMesssageReceived.chat;
+    if (!chat.users) {
+      console.log("Users not defined");
+      return;
+    }
+    chat.users.forEach((user) => {
+      if (user._id == newMesssageReceived.sender._id) return;
+      socket.in(user._id).emit("message received", newMesssageReceived);
+    });
+  });
 });
