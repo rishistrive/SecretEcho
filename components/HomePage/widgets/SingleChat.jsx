@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setCurrentChat } from "@/redux";
+import { setCurrentChat, setNotifications } from "@/redux";
 import styles from "@/styles/Home.module.css";
 import IconButton from "@mui/material/IconButton";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -21,6 +21,7 @@ const SingleChat = () => {
   const selectedChat = useSelector((state) => state.currentChat);
   const loggedUser = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
+  const notifications = useSelector((state) => state.notifications);
   const [openModal, setOpenModal] = useState(false);
   const [openModal2, setOpenModal2] = useState(false);
   const [chatSender, setChatSender] = useState(null);
@@ -41,8 +42,10 @@ const SingleChat = () => {
         selectedChatCompare._id !== newMessageReceived.chat._id
       ) {
         // give notification
+        if (!notifications.includes(newMessageReceived)) {
+          dispatch(setNotifications({ notification: newMessageReceived }));
+        }
       } else {
-        console.log("Effect ran.");
         setMessages((prevValue) => {
           return [...prevValue, newMessageReceived];
         });
