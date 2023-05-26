@@ -31,10 +31,7 @@ const authSlice = createSlice({
       state.chats = action.payload.chats;
     },
     setNotifications: (state, action) => {
-      state.notifications = [
-        action.payload.notification,
-        ...state.notifications,
-      ];
+      state.notifications = action.payload.notifications
     },
   },
 });

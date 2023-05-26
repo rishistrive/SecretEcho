@@ -43,7 +43,11 @@ const SingleChat = () => {
       ) {
         // give notification
         if (!notifications.includes(newMessageReceived)) {
-          dispatch(setNotifications({ notification: newMessageReceived }));
+          dispatch(
+            setNotifications({
+              notifications: [newMessageReceived, ...notifications],
+            })
+          );
         }
       } else {
         setMessages((prevValue) => {
