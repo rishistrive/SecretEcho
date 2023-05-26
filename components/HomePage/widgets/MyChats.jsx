@@ -24,7 +24,7 @@ const MyChats = () => {
 
   const fetchChats = async () => {
     try {
-      const { data } = await axios.get(`http://localhost:3000/api/chats`, {
+      const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API}/api/chats`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       dispatch(setChats({ chats: data }));

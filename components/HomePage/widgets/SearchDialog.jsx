@@ -20,7 +20,7 @@ const SearchDialog = ({ openDialog, handleClose }) => {
       try {
         setLoading(true);
         const { data } = await axios.get(
-          `http://localhost:3000/api/user?search=${search}`,
+          `${process.env.NEXT_PUBLIC_API}/api/user?search=${search}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         setSearchResult(data);
@@ -34,7 +34,7 @@ const SearchDialog = ({ openDialog, handleClose }) => {
   const accessChat = async (user) => {
     try {
       const { data } = await axios.post(
-        `http://localhost:3000/api/chats`,
+        `${process.env.NEXT_PUBLIC_API}/api/chats`,
         {
           userId: user._id,
         },

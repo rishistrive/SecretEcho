@@ -33,7 +33,7 @@ const GroupChatDialog = ({ open, handleClose }) => {
   const fetchUsers = async (query) => {
     try {
       const { data } = await axios.get(
-        `http://localhost:3000/api/user?search=${query}`,
+        `${process.env.NEXT_PUBLIC_API}/api/user?search=${query}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -54,7 +54,7 @@ const GroupChatDialog = ({ open, handleClose }) => {
   const handleSubmit = async () => {
     try {
       const { data } = await axios.post(
-        `http://localhost:3000/api/chats/group`,
+        `${process.env.NEXT_PUBLIC_API}/api/chats/group`,
         { name: groupChatName, users: selectedUsers },
         { headers: { Authorization: `Bearer ${token}` } }
       );

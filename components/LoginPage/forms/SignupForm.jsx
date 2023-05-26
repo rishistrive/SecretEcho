@@ -64,7 +64,7 @@ const SignupForm = () => {
       }
       try {
         const response = await axios.post(
-          "http://localhost:3000/api/user/register",
+          `${process.env.NEXT_PUBLIC_API}/api/user/register`,
           formData
         );
         alert(response.data.message);

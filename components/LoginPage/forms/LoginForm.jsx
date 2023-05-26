@@ -44,7 +44,7 @@ const LoginForm = () => {
       setLoading(true);
       try {
         const response = await axios.post(
-          "http://localhost:3000/api/user/login",
+          `${process.env.NEXT_PUBLIC_API}/api/user/login`,
           loginDetails
         );
         alert(response.data.message);

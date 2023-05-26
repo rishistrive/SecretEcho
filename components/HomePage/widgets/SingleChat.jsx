@@ -13,7 +13,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import SingleChatMessages from "./SingleChatMessages";
 import { io } from "socket.io-client";
 
-const ENDPOINT = `http://localhost:3000`;
+const ENDPOINT = `${process.env.NEXT_PUBLIC_API}`;
 var socket, selectedChatCompare;
 
 const SingleChat = () => {
@@ -70,7 +70,7 @@ const SingleChat = () => {
     if (!newMessage) return;
     try {
       const { data } = await axios.post(
-        `http://localhost:3000/api/messages`,
+        `${process.env.NEXT_PUBLIC_API}/api/messages`,
         {
           content: newMessage,
           chatId: selectedChat._id,
@@ -90,7 +90,7 @@ const SingleChat = () => {
     setLoading(true);
     try {
       const { data } = await axios.get(
-        `http://localhost:3000/api/messages/${selectedChat._id}`,
+        `${process.env.NEXT_PUBLIC_API}/api/messages/${selectedChat._id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

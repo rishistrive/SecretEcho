@@ -31,7 +31,7 @@ const UpdateGroupChatModal = ({ open, handleClose }) => {
     }
     try {
       const { data } = await axios.put(
-        `http://localhost:3000/api/chats/group/rename`,
+        `${process.env.NEXT_PUBLIC_API}/api/chats/group/rename`,
         { chatId: selectedChat._id, chatName: groupChatName },
         {
           headers: {
@@ -40,7 +40,7 @@ const UpdateGroupChatModal = ({ open, handleClose }) => {
         }
       );
       dispatch(setCurrentChat({ currentChat: data }));
-      const response = await axios.get(`http://localhost:3000/api/chats`, {
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API}/api/chats`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       dispatch(setChats({ chats: response.data }));
@@ -58,7 +58,7 @@ const UpdateGroupChatModal = ({ open, handleClose }) => {
     }
     try {
       const { data } = await axios.get(
-        `http://localhost:3000/api/user?search=${query}`,
+        `${process.env.NEXT_PUBLIC_API}/api/user?search=${query}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -88,7 +88,7 @@ const UpdateGroupChatModal = ({ open, handleClose }) => {
     }
     try {
       const { data } = await axios.put(
-        `http://localhost:3000/api/chats/group/add`,
+        `${process.env.NEXT_PUBLIC_API}/api/chats/group/add`,
         {
           chatId: selectedChat._id,
           userId: user._id,
@@ -100,7 +100,7 @@ const UpdateGroupChatModal = ({ open, handleClose }) => {
         }
       );
       dispatch(setCurrentChat({ currentChat: data }));
-      const response = await axios.get(`http://localhost:3000/api/chats`, {
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API}/api/chats`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       dispatch(setChats({ chats: response.data }));
@@ -117,7 +117,7 @@ const UpdateGroupChatModal = ({ open, handleClose }) => {
     }
     try {
       const { data } = await axios.put(
-        `http://localhost:3000/api/chats/group/remove`,
+        `${process.env.NEXT_PUBLIC_API}/api/chats/group/remove`,
         {
           chatId: selectedChat._id,
           userId: user._id,
@@ -129,7 +129,7 @@ const UpdateGroupChatModal = ({ open, handleClose }) => {
         }
       );
       dispatch(setCurrentChat({ currentChat: data }));
-      const response = await axios.get(`http://localhost:3000/api/chats`, {
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API}/api/chats`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       dispatch(setChats({ chats: response.data }));
@@ -145,7 +145,7 @@ const UpdateGroupChatModal = ({ open, handleClose }) => {
     }
     try {
       const { data } = await axios.put(
-        `http://localhost:3000/api/chats/group/remove`,
+        `${process.env.NEXT_PUBLIC_API}/api/chats/group/remove`,
         {
           chatId: selectedChat._id,
           userId: loggedUser._id,
@@ -157,7 +157,7 @@ const UpdateGroupChatModal = ({ open, handleClose }) => {
         }
       );
       dispatch(setCurrentChat({ currentChat: null }));
-      const response = await axios.get(`http://localhost:3000/api/chats`, {
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API}/api/chats`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       dispatch(setChats({ chats: response.data }));
