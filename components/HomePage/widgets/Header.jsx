@@ -10,14 +10,16 @@ import {
 } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Badge from "@mui/material/Badge";
 import { useSelector, useDispatch } from "react-redux";
-import { setLogout } from "@/redux";
+import { setLogout, setCurrentChat, setNotifications } from "@/redux";
 import ProfileModal from "./ProfileModal";
 import SearchDialog from "./SearchDialog";
 
 const Header = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+  const notifications = useSelector((state) => state.notifications);
   const [loadingChat, setLoadingChat] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorEl2, setAnchorEl2] = useState(null);
@@ -34,6 +36,17 @@ const Header = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const handleNotificationClose = (notification) => {
+    dispatch(setCurrentChat({ currentChat: notification.chat }));
+    dispatch(
+      setNotifications({
+        notifications: notifications.filter((item) => {
+          return item._id !== notification._id;
+        }),
+      })
+    );
+    handleClose2();
+  };
   const handleClose2 = () => {
     setAnchorEl2(null);
   };
@@ -41,6 +54,7 @@ const Header = () => {
     dispatch(setLogout());
   };
 
+  console.log(notifications);
   return (
     <div className={styles.header}>
       <button
@@ -65,7 +79,13 @@ const Header = () => {
           variant="contained"
           onClick={handleClick2}
         >
-          <NotificationsIcon fontSize="medium" sx={{ color: "black" }} />
+          {notifications.length > 0 ? (
+            <Badge badgeContent={notifications.length} color={"error"}>
+              <NotificationsIcon fontSize="medium" sx={{ color: "black" }} />
+            </Badge>
+          ) : (
+            <NotificationsIcon fontSize="medium" sx={{ color: "black" }} />
+          )}
         </IconButton>
         <Button
           aria-controls={open ? "basic-menu" : undefined}
@@ -78,7 +98,20 @@ const Header = () => {
         </Button>
       </div>
       <Menu anchorEl={anchorEl2} open={open2} onClose={handleClose2}>
-        <MenuItem onClick={handleClose}>Notifications menu</MenuItem>
+        {notifications.length > 0 ? (
+          notifications.map((notification, index) => {
+            return (
+              <MenuItem
+                key={index}
+                onClick={() => handleNotificationClose(notification)}
+              >
+                <span>New message from {notification.sender.name}</span>
+              </MenuItem>
+            );
+          })
+        ) : (
+          <MenuItem onClick={handleClose2}>No new notifications</MenuItem>
+        )}
       </Menu>
       <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
         <MenuItem
