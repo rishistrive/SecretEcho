@@ -2,7 +2,7 @@
 
 ---
 
-A real-time chat web application built using ReactJS, NextJS, Express, MongoDB.
+A Fullstack chat application with real time communication built using ReactJS, NextJS, MongoDB and Socket.IO.
 
 > Portfolio project, Open to contributions
 
@@ -77,7 +77,9 @@ CLOUDINARY_API_SECRET=cloudinaryApiSecret
 ```
 
 > For the JWT_SECRET_KEY, you can put any string that you want.
+
 > For the MONGODB_URL, you have to put the connection string that is used to connect to your database, whether it's local or in the cloud.
+
 > For the CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY and CLOUDINARY_API_SECRET, you need to get these credentials from [Cloudinary](https://cloudinary.com), which is a cloud-based media management platform that provides a comprehensive solution for storing, optimizing, manipulating, and delivering digital media assets such as images, videos, and audio files. 
 5. Run `npm start` to run the app.
 ```bash
