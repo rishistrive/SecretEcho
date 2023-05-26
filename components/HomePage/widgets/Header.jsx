@@ -53,8 +53,7 @@ const Header = () => {
   const handleLogout = () => {
     dispatch(setLogout());
   };
-
-  console.log(notifications);
+  
   return (
     <div className={styles.header}>
       <button

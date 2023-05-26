@@ -21,7 +21,6 @@ const GroupChatDialog = ({ open, handleClose }) => {
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [searchResult, setSearchResult] = useState([]);
 
-  // console.log(selectedUsers);
   const closeModal = () => {
     setGroupChatName("");
     setSearch("");
