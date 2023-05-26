@@ -7,9 +7,9 @@
 .title_container {
   display: flex;
   justify-content: center;
-  padding: 1.2rem 8rem;
+  padding: 1.2rem 2rem;
   background-color: white;
-  width: 23rem;
+  width: 35rem;
   margin: 20px 0 15px 0;
   border-radius: 10px;
   border-width: 1px;
@@ -88,4 +88,14 @@
 .form_error {
   color: red;
   font-weight: 600;
+}
+
+/* Media Queries */
+@media (max-width: 830px) {
+  .title_container {
+    width: 69%;
+  }
+  .login_container{
+    width: 69%;
+  }
 }
