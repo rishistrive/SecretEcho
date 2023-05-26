@@ -1,0 +1,196 @@
+[{
+  "_id": {
+    "$oid": "645f674ca431f0a657ea178d"
+  },
+  "chatName": "sender",
+  "isGroupChat": false,
+  "users": [
+    {
+      "$oid": "645d36155892f5925eb3f545"
+    },
+    {
+      "$oid": "645e727f311ac1c3bf0caa42"
+    }
+  ],
+  "createdAt": {
+    "$date": "2023-05-13T10:32:44.972Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-13T10:32:44.972Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "645f74a09ccdee3ffd2e2140"
+  },
+  "chatName": "Test Group",
+  "isGroupChat": true,
+  "users": [
+    {
+      "$oid": "645cce0fdc0ba3686809a237"
+    },
+    {
+      "$oid": "645d36155892f5925eb3f545"
+    },
+    {
+      "$oid": "645e727f311ac1c3bf0caa42"
+    }
+  ],
+  "groupAdmin": {
+    "$oid": "645d36155892f5925eb3f545"
+  },
+  "createdAt": {
+    "$date": "2023-05-13T11:29:36.037Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-18T20:46:00.853Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646266433a2895eb0937143b"
+  },
+  "chatName": "sender",
+  "isGroupChat": false,
+  "users": [
+    {
+      "$oid": "645cce0fdc0ba3686809a237"
+    },
+    {
+      "$oid": "645e727f311ac1c3bf0caa42"
+    }
+  ],
+  "createdAt": {
+    "$date": "2023-05-15T17:05:07.841Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-15T17:05:07.841Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "chatName": "sender",
+  "isGroupChat": false,
+  "users": [
+    {
+      "$oid": "645cce0fdc0ba3686809a237"
+    },
+    {
+      "$oid": "645d36155892f5925eb3f545"
+    }
+  ],
+  "createdAt": {
+    "$date": "2023-05-15T17:13:20.377Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-26T14:33:37.989Z"
+  },
+  "__v": 0,
+  "latestMessage": {
+    "$oid": "6470c34190d05db878827d30"
+  }
+},{
+  "_id": {
+    "$oid": "6463811c42bacad12075b29f"
+  },
+  "chatName": "sender",
+  "isGroupChat": false,
+  "users": [
+    {
+      "$oid": "645cce0fdc0ba3686809a237"
+    },
+    {
+      "$oid": "645fbaa17f91efbd2e6de658"
+    }
+  ],
+  "createdAt": {
+    "$date": "2023-05-16T13:11:56.127Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-16T13:11:56.127Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646388d442bacad12075b2e4"
+  },
+  "chatName": "sender",
+  "isGroupChat": false,
+  "users": [
+    {
+      "$oid": "645cce0fdc0ba3686809a237"
+    },
+    {
+      "$oid": "645f792166cfeb38470910ac"
+    }
+  ],
+  "createdAt": {
+    "$date": "2023-05-16T13:44:52.972Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-16T13:44:52.972Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6463894b42bacad12075b304"
+  },
+  "chatName": "sender",
+  "isGroupChat": false,
+  "users": [
+    {
+      "$oid": "645cce0fdc0ba3686809a237"
+    },
+    {
+      "$oid": "6463893542bacad12075b2f1"
+    }
+  ],
+  "createdAt": {
+    "$date": "2023-05-16T13:46:51.627Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-19T20:44:39.238Z"
+  },
+  "__v": 0,
+  "latestMessage": {
+    "$oid": "6467dfb7c5f977a81c3537ab"
+  }
+},{
+  "_id": {
+    "$oid": "6464261baf0dd46b840efce7"
+  },
+  "chatName": "Justice League",
+  "isGroupChat": true,
+  "users": [
+    {
+      "$oid": "645cce0fdc0ba3686809a237"
+    },
+    {
+      "$oid": "645fbaa17f91efbd2e6de658"
+    },
+    {
+      "$oid": "645f792166cfeb38470910ac"
+    },
+    {
+      "$oid": "645d36155892f5925eb3f545"
+    },
+    {
+      "$oid": "6463893542bacad12075b2f1"
+    }
+  ],
+  "groupAdmin": {
+    "$oid": "645cce0fdc0ba3686809a237"
+  },
+  "createdAt": {
+    "$date": "2023-05-17T00:55:55.074Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-19T13:40:15.703Z"
+  },
+  "__v": 0,
+  "latestMessage": {
+    "$oid": "64677c3fb7b990ee90b4f56a"
+  }
+}]

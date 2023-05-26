@@ -1,0 +1,91 @@
+[{
+  "_id": {
+    "$oid": "645cce0fdc0ba3686809a237"
+  },
+  "name": "Daniel Goye",
+  "email": "danielgoye92@gmail.com",
+  "password": "$2a$10$qIJ6n6F.4atTscvUlq7pF.oUn8M0QKS/XP3.0cWYRbobY49K6u3o6",
+  "pic": "https://res.cloudinary.com/dhb2zvszq/image/upload/v1683803664/Chit_Chat/Profile_Pictures/kuo8prwytbh1t6fbhzij.png",
+  "createdAt": {
+    "$date": "2023-05-11T11:14:23.653Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-11T11:14:23.653Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "645d36155892f5925eb3f545"
+  },
+  "name": "Fake Name",
+  "email": "fakename@gmail.com",
+  "password": "$2a$10$XhIzV5tOMht9lF9Vi.Ol3euaDuXYgx15fLLzUA3Yp/xM5ERlUtQhu",
+  "pic": "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+  "createdAt": {
+    "$date": "2023-05-11T18:38:13.244Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-11T18:38:13.244Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "645e727f311ac1c3bf0caa42"
+  },
+  "name": "Luke Skywalker",
+  "email": "lukeskywalker@gmail.com",
+  "password": "$2a$10$VEoUnRrCR7MInV9bq1RuD.rPR1mFY1C7S/S1g8seiZMwuXfMq2PrO",
+  "pic": "https://res.cloudinary.com/dhb2zvszq/image/upload/v1683911296/Chit_Chat/Profile_Pictures/m1uyvldaazaqpfpbtcgm.png",
+  "createdAt": {
+    "$date": "2023-05-12T17:08:15.201Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-12T17:08:15.201Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "645f792166cfeb38470910ac"
+  },
+  "name": "Bruce Wayne",
+  "email": "brucewayne@gmail.com",
+  "password": "$2a$10$OH52vkWHwSjItJCyqgdkCu7DhnQZhP2Y1aDJMqr1MpkVgpOK/F.iu",
+  "pic": "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+  "createdAt": {
+    "$date": "2023-05-13T11:48:49.166Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-13T11:48:49.166Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "645fbaa17f91efbd2e6de658"
+  },
+  "name": "Clark Kent",
+  "email": "clarkkent@gmail.com",
+  "password": "$2a$10$kqPunbyb4nNnDwxV524fyOmFaPBN1sDILuTL0W/P8g1n.uHgOAfZW",
+  "pic": "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+  "createdAt": {
+    "$date": "2023-05-13T16:28:17.846Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-13T16:28:17.846Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6463893542bacad12075b2f1"
+  },
+  "name": "Trevor Philips",
+  "email": "trevorphilips@gmail.com",
+  "password": "$2a$10$eROslvfjWNDDwvYoY5321u5Gu2NLGq7hQ2K/1s6KK0ytmLA/QhW2y",
+  "pic": "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+  "createdAt": {
+    "$date": "2023-05-16T13:46:29.448Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-16T13:46:29.448Z"
+  },
+  "__v": 0
+}]

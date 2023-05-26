@@ -1,0 +1,1081 @@
+[{
+  "_id": {
+    "$oid": "64677c3fb7b990ee90b4f56a"
+  },
+  "sender": {
+    "$oid": "645d36155892f5925eb3f545"
+  },
+  "content": "Hello",
+  "chat": {
+    "$oid": "6464261baf0dd46b840efce7"
+  },
+  "createdAt": {
+    "$date": "2023-05-19T13:40:15.680Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-19T13:40:15.680Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64677e64864259e2c4efe585"
+  },
+  "sender": {
+    "$oid": "645d36155892f5925eb3f545"
+  },
+  "content": "Hello",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-19T13:49:24.618Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-19T13:49:24.618Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6467dd71c5f977a81c353798"
+  },
+  "sender": {
+    "$oid": "645cce0fdc0ba3686809a237"
+  },
+  "content": "How are you?",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-19T20:34:57.976Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-19T20:34:57.976Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6467dfb7c5f977a81c3537ab"
+  },
+  "sender": {
+    "$oid": "645cce0fdc0ba3686809a237"
+  },
+  "content": "Hello Trevor",
+  "chat": {
+    "$oid": "6463894b42bacad12075b304"
+  },
+  "createdAt": {
+    "$date": "2023-05-19T20:44:39.228Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-19T20:44:39.228Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646b86abbc164e0f7d34e8ef"
+  },
+  "sender": {
+    "$oid": "645d36155892f5925eb3f545"
+  },
+  "content": "Hello",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-22T15:13:47.415Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-22T15:13:47.415Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646b8bcfbc164e0f7d34e97a"
+  },
+  "sender": {
+    "$oid": "645d36155892f5925eb3f545"
+  },
+  "content": "Hello Daniel",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-22T15:35:43.349Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-22T15:35:43.349Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646b8bdfbc164e0f7d34e981"
+  },
+  "sender": {
+    "$oid": "645d36155892f5925eb3f545"
+  },
+  "content": "How are you today?",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-22T15:35:59.468Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-22T15:35:59.468Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646c7b420249b77715fe7e23"
+  },
+  "sender": {
+    "$oid": "645cce0fdc0ba3686809a237"
+  },
+  "content": "I am fine",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-23T08:37:22.563Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-23T08:37:22.563Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646c7b980249b77715fe7e3e"
+  },
+  "sender": {
+    "$oid": "645cce0fdc0ba3686809a237"
+  },
+  "content": "How are you?",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-23T08:38:48.951Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-23T08:38:48.951Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646c7bd30249b77715fe7e5a"
+  },
+  "sender": {
+    "$oid": "645d36155892f5925eb3f545"
+  },
+  "content": "I am also fine",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-23T08:39:47.742Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-23T08:39:47.742Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646c7be50249b77715fe7e65"
+  },
+  "sender": {
+    "$oid": "645cce0fdc0ba3686809a237"
+  },
+  "content": "That's good",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-23T08:40:05.340Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-23T08:40:05.340Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646c7bf40249b77715fe7e70"
+  },
+  "sender": {
+    "$oid": "645cce0fdc0ba3686809a237"
+  },
+  "content": "We thank God",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-23T08:40:20.977Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-23T08:40:20.977Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646c7c020249b77715fe7e7b"
+  },
+  "sender": {
+    "$oid": "645d36155892f5925eb3f545"
+  },
+  "content": "Amen",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-23T08:40:34.594Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-23T08:40:34.594Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646c7c140249b77715fe7e86"
+  },
+  "sender": {
+    "$oid": "645d36155892f5925eb3f545"
+  },
+  "content": "Are you still in school?",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-23T08:40:52.805Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-23T08:40:52.805Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646c7c1e0249b77715fe7e91"
+  },
+  "sender": {
+    "$oid": "645cce0fdc0ba3686809a237"
+  },
+  "content": "Yes I am",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-23T08:41:02.661Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-23T08:41:02.661Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646c7fb5337356de47234fd1"
+  },
+  "sender": {
+    "$oid": "645cce0fdc0ba3686809a237"
+  },
+  "content": "Are you?",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-23T08:56:21.349Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-23T08:56:21.349Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646c802f337356de47234fed"
+  },
+  "sender": {
+    "$oid": "645d36155892f5925eb3f545"
+  },
+  "content": "No...I actually have a job now ",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-23T08:58:23.949Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-23T08:58:23.949Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646c8068337356de47235014"
+  },
+  "sender": {
+    "$oid": "645cce0fdc0ba3686809a237"
+  },
+  "content": "Really...where?",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-23T08:59:20.882Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-23T08:59:20.882Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646c807d337356de47235023"
+  },
+  "sender": {
+    "$oid": "645d36155892f5925eb3f545"
+  },
+  "content": "At Microsoft",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-23T08:59:41.129Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-23T08:59:41.129Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646c87ac337356de47235085"
+  },
+  "sender": {
+    "$oid": "645cce0fdc0ba3686809a237"
+  },
+  "content": "That's amazing",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-23T09:30:20.878Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-23T09:30:20.878Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646c911c337356de47235280"
+  },
+  "sender": {
+    "$oid": "645d36155892f5925eb3f545"
+  },
+  "content": "Thank you",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-23T10:10:36.935Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-23T10:10:36.935Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646e4671dacdc640683bbe27"
+  },
+  "sender": {
+    "$oid": "645cce0fdc0ba3686809a237"
+  },
+  "content": "How are your studies going?",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-24T17:16:33.493Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-24T17:16:33.493Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646e46b0dacdc640683bbe36"
+  },
+  "sender": {
+    "$oid": "645d36155892f5925eb3f545"
+  },
+  "content": "I just told you I have a job...I should be asking you that question",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-24T17:17:36.222Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-24T17:17:36.222Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646e473556f26a5d5c56a3ef"
+  },
+  "sender": {
+    "$oid": "645cce0fdc0ba3686809a237"
+  },
+  "content": "Oh yeah...it's a bit hard right now",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-24T17:19:49.793Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-24T17:19:49.793Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646e478a56f26a5d5c56a3fe"
+  },
+  "sender": {
+    "$oid": "645d36155892f5925eb3f545"
+  },
+  "content": "Why is that?",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-24T17:21:14.320Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-24T17:21:14.320Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646e480c56f26a5d5c56a409"
+  },
+  "sender": {
+    "$oid": "645cce0fdc0ba3686809a237"
+  },
+  "content": "We are doing a project now so it's a bit challenging",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-24T17:23:24.047Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-24T17:23:24.047Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646e4a8de044dd9cb79863f0"
+  },
+  "sender": {
+    "$oid": "645cce0fdc0ba3686809a237"
+  },
+  "content": "Also we are doing more units",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-24T17:34:05.474Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-24T17:34:05.474Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646e4abde044dd9cb798642b"
+  },
+  "sender": {
+    "$oid": "645d36155892f5925eb3f545"
+  },
+  "content": "How many?",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-24T17:34:53.665Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-24T17:34:53.665Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646e4aeee044dd9cb798646a"
+  },
+  "sender": {
+    "$oid": "645cce0fdc0ba3686809a237"
+  },
+  "content": "3",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-24T17:35:42.120Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-24T17:35:42.120Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646e4affe044dd9cb7986475"
+  },
+  "sender": {
+    "$oid": "645cce0fdc0ba3686809a237"
+  },
+  "content": "Sorry 4",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-24T17:35:59.249Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-24T17:35:59.249Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646e4c3de044dd9cb79864b4"
+  },
+  "sender": {
+    "$oid": "645d36155892f5925eb3f545"
+  },
+  "content": "That's alot",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-24T17:41:17.064Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-24T17:41:17.064Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646e4e04e044dd9cb79864f3"
+  },
+  "sender": {
+    "$oid": "645cce0fdc0ba3686809a237"
+  },
+  "content": "Yes it is",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-24T17:48:52.614Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-24T17:48:52.614Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646e4e20e044dd9cb79864fa"
+  },
+  "sender": {
+    "$oid": "645d36155892f5925eb3f545"
+  },
+  "content": "Enough about me",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-24T17:49:20.269Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-24T17:49:20.269Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646e4f15e044dd9cb7986501"
+  },
+  "sender": {
+    "$oid": "645cce0fdc0ba3686809a237"
+  },
+  "content": "Ask",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-24T17:53:25.503Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-24T17:53:25.503Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646e4f4ae044dd9cb7986508"
+  },
+  "sender": {
+    "$oid": "645d36155892f5925eb3f545"
+  },
+  "content": "I'll just type random things now",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-24T17:54:18.238Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-24T17:54:18.238Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646e5230e044dd9cb798653f"
+  },
+  "sender": {
+    "$oid": "645cce0fdc0ba3686809a237"
+  },
+  "content": "Fine by me",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-24T18:06:40.015Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-24T18:06:40.015Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646e53b8305c09057789b66c"
+  },
+  "sender": {
+    "$oid": "645d36155892f5925eb3f545"
+  },
+  "content": "Which year?",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-24T18:13:12.062Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-24T18:13:12.062Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646e53c5305c09057789b677"
+  },
+  "sender": {
+    "$oid": "645cce0fdc0ba3686809a237"
+  },
+  "content": "4",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-24T18:13:25.448Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-24T18:13:25.448Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646e5458305c09057789b67e"
+  },
+  "sender": {
+    "$oid": "645d36155892f5925eb3f545"
+  },
+  "content": "I'm almost done with it",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-24T18:15:52.665Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-24T18:15:52.665Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646e79bfc257849bac101027"
+  },
+  "sender": {
+    "$oid": "645d36155892f5925eb3f545"
+  },
+  "content": "I meant you are almost done with it",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-24T20:55:27.416Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-24T20:55:27.416Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646e79d3c257849bac10102e"
+  },
+  "sender": {
+    "$oid": "645cce0fdc0ba3686809a237"
+  },
+  "content": "Yes I am",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-24T20:55:47.598Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-24T20:55:47.598Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646e8c550f5b5cff416eb07a"
+  },
+  "sender": {
+    "$oid": "645d36155892f5925eb3f545"
+  },
+  "content": "That's good",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-24T22:14:45.572Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-24T22:14:45.572Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646e90efc7ddef208b88daa7"
+  },
+  "sender": {
+    "$oid": "645d36155892f5925eb3f545"
+  },
+  "content": "I am glad for you",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-24T22:34:23.903Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-24T22:34:23.903Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646fc6fbb3fa454ec3ec6d8f"
+  },
+  "sender": {
+    "$oid": "645cce0fdc0ba3686809a237"
+  },
+  "content": "Thank you",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-25T20:37:15.822Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-25T20:37:15.822Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646fc762b3fa454ec3ec6d9e"
+  },
+  "sender": {
+    "$oid": "645d36155892f5925eb3f545"
+  },
+  "content": "You are welcome",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-25T20:38:58.170Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-25T20:38:58.170Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "647092b3458b2c3c331d11e8"
+  },
+  "sender": {
+    "$oid": "645d36155892f5925eb3f545"
+  },
+  "content": "Hello",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-26T11:06:27.952Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-26T11:06:27.952Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6470978890d05db878827bac"
+  },
+  "sender": {
+    "$oid": "645cce0fdc0ba3686809a237"
+  },
+  "content": "Hello",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-26T11:27:04.298Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-26T11:27:04.298Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64709d8c90d05db878827bf7"
+  },
+  "sender": {
+    "$oid": "645d36155892f5925eb3f545"
+  },
+  "content": "How are you today?",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-26T11:52:44.717Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-26T11:52:44.717Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64709dc490d05db878827c26"
+  },
+  "sender": {
+    "$oid": "645cce0fdc0ba3686809a237"
+  },
+  "content": "I'm fine",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-26T11:53:40.436Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-26T11:53:40.436Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64709de590d05db878827c31"
+  },
+  "sender": {
+    "$oid": "645d36155892f5925eb3f545"
+  },
+  "content": "That's good",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-26T11:54:13.486Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-26T11:54:13.486Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64709e0490d05db878827c38"
+  },
+  "sender": {
+    "$oid": "645d36155892f5925eb3f545"
+  },
+  "content": "Any challenges at school?",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-26T11:54:44.550Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-26T11:54:44.550Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64709e3490d05db878827c4b"
+  },
+  "sender": {
+    "$oid": "645d36155892f5925eb3f545"
+  },
+  "content": "Or anything else?",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-26T11:55:32.369Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-26T11:55:32.369Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64709ea890d05db878827c5a"
+  },
+  "sender": {
+    "$oid": "645cce0fdc0ba3686809a237"
+  },
+  "content": "No not really",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-26T11:57:28.641Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-26T11:57:28.641Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64709eb090d05db878827c61"
+  },
+  "sender": {
+    "$oid": "645cce0fdc0ba3686809a237"
+  },
+  "content": "You?",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-26T11:57:36.705Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-26T11:57:36.705Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6470ac1f90d05db878827cb5"
+  },
+  "sender": {
+    "$oid": "645d36155892f5925eb3f545"
+  },
+  "content": "Also not really",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-26T12:54:55.307Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-26T12:54:55.307Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6470ac3790d05db878827cbc"
+  },
+  "sender": {
+    "$oid": "645cce0fdc0ba3686809a237"
+  },
+  "content": "That's good",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-26T12:55:19.074Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-26T12:55:19.074Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6470ac4490d05db878827cc7"
+  },
+  "sender": {
+    "$oid": "645d36155892f5925eb3f545"
+  },
+  "content": "We thank God",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-26T12:55:32.641Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-26T12:55:32.641Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6470ac4e90d05db878827cce"
+  },
+  "sender": {
+    "$oid": "645cce0fdc0ba3686809a237"
+  },
+  "content": "Yes we do",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-26T12:55:42.780Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-26T12:55:42.780Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6470acc890d05db878827cd9"
+  },
+  "sender": {
+    "$oid": "645d36155892f5925eb3f545"
+  },
+  "content": "Amen",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-26T12:57:44.866Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-26T12:57:44.866Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6470c34190d05db878827d30"
+  },
+  "sender": {
+    "$oid": "645cce0fdc0ba3686809a237"
+  },
+  "content": "Are you in the justice league?",
+  "chat": {
+    "$oid": "646268303a2895eb09371453"
+  },
+  "createdAt": {
+    "$date": "2023-05-26T14:33:37.979Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-26T14:33:37.979Z"
+  },
+  "__v": 0
+}]
