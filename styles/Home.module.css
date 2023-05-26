@@ -309,3 +309,25 @@
   flex: 1 1;
   padding: 8px 9px;
 }
+
+/* Media Queries */
+@media (max-width: 930px) {
+  .hidden_container{
+    display: none;
+  }
+}
+@media (max-width: 530px) {
+  .search_text {
+    display: none;
+  }
+}
+@media (max-width: 535px) {
+  .groupchat_title {
+    gap: 7rem;
+  }
+}
+@media (max-width: 490px) {
+  .groupchat_title {
+    gap: 20px;
+  }
+}

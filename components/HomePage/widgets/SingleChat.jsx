@@ -145,7 +145,11 @@ const SingleChat = () => {
   };
 
   return (
-    <div className={styles.chatbox_container}>
+    <div
+      className={`${styles.chatbox_container} ${
+        !selectedChat && styles.hidden_container
+      }`}
+    >
       {selectedChat ? (
         <>
           <div className={styles.select_chat_heading}>

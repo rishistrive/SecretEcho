@@ -45,6 +45,9 @@ const SingleChatMessages = ({ messages, istyping }) => {
                   marginLeft: !isLastMessage(message, messages, index)
                     ? "49px"
                     : "0px",
+                  marginBottom: isLastMessage(message, messages, index)
+                    ? "25px"
+                    : "0px",
                 }}
                 className={
                   message.sender._id == user._id

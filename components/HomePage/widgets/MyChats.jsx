@@ -39,7 +39,11 @@ const MyChats = () => {
   }, []);
 
   return (
-    <div className={styles.mychats_container}>
+    <div
+      className={`${styles.mychats_container} ${
+        currentChat && styles.hidden_container
+      }`}
+    >
       <div className={styles.mychats_heading}>
         My Chats
         <button onClick={handleClickOpen}>
