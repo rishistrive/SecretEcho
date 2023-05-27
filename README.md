@@ -6,6 +6,9 @@ A Fullstack chat application with real time communication built using ReactJS, N
 
 > Portfolio project, Open to contributions
 
+You can view the project here:
+https://chitchat519.netlify.app/
+
 ## Technologies used
 
 <h4 align="left">Frontend:</h4>
