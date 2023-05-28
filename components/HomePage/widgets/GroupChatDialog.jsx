@@ -11,6 +11,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { setChats, setCurrentChat } from "@/redux";
 import UserListItem from "./UserListItem";
 import Grid from "@mui/material/Grid";
+import Skeleton from "@mui/material/Skeleton";
+import Stack from "@mui/material/Stack";
 
 const GroupChatDialog = ({ open, handleClose }) => {
   const dispatch = useDispatch();
@@ -20,6 +22,7 @@ const GroupChatDialog = ({ open, handleClose }) => {
   const [search, setSearch] = useState("");
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [searchResult, setSearchResult] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const closeModal = () => {
     setGroupChatName("");
@@ -31,6 +34,7 @@ const GroupChatDialog = ({ open, handleClose }) => {
 
   const fetchUsers = async (query) => {
     try {
+      setLoading(true);
       const { data } = await axios.get(
         `${process.env.NEXT_PUBLIC_API}/api/user?search=${query}`,
         {
@@ -39,15 +43,21 @@ const GroupChatDialog = ({ open, handleClose }) => {
           },
         }
       );
+      setLoading(false);
       setSearchResult(data);
     } catch (error) {
+      setLoading(false);
       alert(error.response.data);
     }
   };
 
   const handleSearchChange = async (e) => {
     setSearch(e.target.value);
-    fetchUsers(e.target.value);
+    if (e.target.value.length <= 0) {
+      setSearchResult([]);
+    } else {
+      fetchUsers(e.target.value);
+    }
   };
 
   const handleSubmit = async () => {
@@ -121,20 +131,34 @@ const GroupChatDialog = ({ open, handleClose }) => {
             );
           })}
         </Grid>
-        {searchResult.slice(0, 4).map((user, index) => (
-          <UserListItem
-            key={index}
-            user={user}
-            handleFunction={(userObject) => {
-              !selectedUsers.find((item) => {
-                return JSON.stringify(item) === JSON.stringify(userObject);
-              }) &&
-                setSelectedUsers((prevValue) => {
-                  return [...prevValue, userObject];
-                });
-            }}
-          />
-        ))}
+        {!loading ? (
+          searchResult.slice(0, 4).map((user, index) => (
+            <UserListItem
+              key={index}
+              user={user}
+              handleFunction={(userObject) => {
+                !selectedUsers.find((item) => {
+                  return JSON.stringify(item) === JSON.stringify(userObject);
+                }) &&
+                  setSelectedUsers((prevValue) => {
+                    return [...prevValue, userObject];
+                  });
+              }}
+            />
+          ))
+        ) : (
+          <Stack spacing={0} marginLeft={1.5} marginRight={1.5}>
+            {Array(2)
+              .fill()
+              .map((_, index) => (
+                <Skeleton
+                  key={index}
+                  variant="text"
+                  sx={{ fontSize: "3rem" }}
+                />
+              ))}
+          </Stack>
+        )}
       </DialogContent>
       <DialogActions>
         <Button variant="contained" onClick={handleSubmit}>
