@@ -13,6 +13,7 @@ import UserListItem from "./UserListItem";
 import Grid from "@mui/material/Grid";
 import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
+import Toast from "@/components/common/Toast";
 
 const GroupChatDialog = ({ open, handleClose }) => {
   const dispatch = useDispatch();
@@ -23,6 +24,11 @@ const GroupChatDialog = ({ open, handleClose }) => {
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [searchResult, setSearchResult] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [snackOpen, setSnackOpen] = useState(false);
+  const [snackbarProps, setSnackBarProps] = useState({
+    color: "success",
+    message: "Snackbar message",
+  });
 
   const closeModal = () => {
     setGroupChatName("");
@@ -47,7 +53,11 @@ const GroupChatDialog = ({ open, handleClose }) => {
       setSearchResult(data);
     } catch (error) {
       setLoading(false);
-      alert(error.response.data);
+      setSnackBarProps({
+        color: "error",
+        message: error.response.data,
+      });
+      setSnackOpen(true);
     }
   };
 
@@ -73,8 +83,19 @@ const GroupChatDialog = ({ open, handleClose }) => {
       }) && dispatch(setChats({ chats: [data, ...chats] }));
       closeModal();
     } catch (error) {
-      alert(error.response.data);
+      setSnackBarProps({
+        color: "error",
+        message: error.response.data,
+      });
+      setSnackOpen(true);
     }
+  };
+
+  const handleSnackClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setSnackOpen(false);
   };
 
   return (
@@ -165,6 +186,12 @@ const GroupChatDialog = ({ open, handleClose }) => {
           Create chat
         </Button>
       </DialogActions>
+      <Toast
+        color={snackbarProps.color}
+        message={snackbarProps.message}
+        snackOpen={snackOpen}
+        handleSnackClose={handleSnackClose}
+      />
     </Dialog>
   );
 };

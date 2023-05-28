@@ -7,6 +7,7 @@ import { setCurrentChat, setChats } from "@/redux";
 import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
 import UserListItem from "./UserListItem";
+import Toast from "@/components/common/Toast";
 
 const SearchDialog = ({ openDialog, handleClose }) => {
   const dispatch = useDispatch();
@@ -15,6 +16,20 @@ const SearchDialog = ({ openDialog, handleClose }) => {
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [searchResult, setSearchResult] = useState([]);
+  const [snackOpen, setSnackOpen] = useState(false);
+  const [snackbarProps, setSnackBarProps] = useState({
+    color: "success",
+    message: "Snackbar message",
+  });
+
+  const handleSnackClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setSnackOpen(false);
+  };
+
+
   const handleSubmit = async () => {
     if (search) {
       try {
@@ -26,7 +41,11 @@ const SearchDialog = ({ openDialog, handleClose }) => {
         setSearchResult(data);
         setLoading(false);
       } catch (error) {
-        alert(error.response.data);
+        setSnackBarProps({
+          color: "error",
+          message: error.response.data,
+        });
+        setSnackOpen(true);
         setLoading(false);
       }
     }
@@ -46,9 +65,14 @@ const SearchDialog = ({ openDialog, handleClose }) => {
       }) && dispatch(setChats({ chats: [data, ...chats] }));
       handleClose();
     } catch (error) {
-      alert(error.response.data);
+      setSnackBarProps({
+        color: "error",
+        message: error.response.data,
+      });
+      setSnackOpen(true);
     }
   };
+
   return (
     <Drawer
       anchor="left"
@@ -91,6 +115,12 @@ const SearchDialog = ({ openDialog, handleClose }) => {
           ))
         )}
       </div>
+      <Toast
+        color={snackbarProps.color}
+        message={snackbarProps.message}
+        snackOpen={snackOpen}
+        handleSnackClose={handleSnackClose}
+      />
     </Drawer>
   );
 };

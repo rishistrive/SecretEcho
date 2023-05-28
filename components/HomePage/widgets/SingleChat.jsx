@@ -12,6 +12,7 @@ import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
 import SingleChatMessages from "./SingleChatMessages";
 import { io } from "socket.io-client";
+import Toast from "@/components/common/Toast";
 
 const ENDPOINT = `${process.env.NEXT_PUBLIC_API}`;
 var socket, selectedChatCompare;
@@ -31,6 +32,18 @@ const SingleChat = () => {
   const [socketConnection, setSocketConnection] = useState(false);
   const [typing, setTyping] = useState(false);
   const [istyping, setIsTyping] = useState(false);
+  const [snackOpen, setSnackOpen] = useState(false);
+  const [snackbarProps, setSnackBarProps] = useState({
+    color: "success",
+    message: "Snackbar message",
+  });
+
+  const handleSnackClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setSnackOpen(false);
+  };
 
   useEffect(() => {
     socket = io(ENDPOINT);
@@ -82,7 +95,11 @@ const SingleChat = () => {
       });
       socket.emit("new message", data);
     } catch (error) {
-      alert(error.response.data);
+      setSnackBarProps({
+        color: "error",
+        message: error.response.data,
+      });
+      setSnackOpen(true);
     }
   };
 
@@ -102,7 +119,11 @@ const SingleChat = () => {
       socket.emit("join chat", selectedChat._id);
     } catch (error) {
       console.log(error);
-      alert(error.response.data);
+      setSnackBarProps({
+        color: "error",
+        message: error.response.data,
+      });
+      setSnackOpen(true);
       setLoading(false);
     }
   };
@@ -213,6 +234,12 @@ const SingleChat = () => {
           </span>
         </div>
       )}
+      <Toast
+        color={snackbarProps.color}
+        message={snackbarProps.message}
+        snackOpen={snackOpen}
+        handleSnackClose={handleSnackClose}
+      />
     </div>
   );
 };

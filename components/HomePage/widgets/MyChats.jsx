@@ -6,6 +6,7 @@ import styles from "@/styles/Home.module.css";
 import AddIcon from "@mui/icons-material/Add";
 import GroupChatDialog from "./GroupChatDialog";
 import CircularProgress from "@mui/material/CircularProgress";
+import Toast from "@/components/common/Toast";
 
 const MyChats = () => {
   const dispatch = useDispatch();
@@ -14,6 +15,11 @@ const MyChats = () => {
   const currentChat = useSelector((state) => state.currentChat);
   const chats = useSelector((state) => state.chats);
   const [loggedUser, setLoggedUser] = useState(user);
+  const [snackOpen, setSnackOpen] = useState(false);
+  const [snackbarProps, setSnackBarProps] = useState({
+    color: "success",
+    message: "Snackbar message",
+  });
 
   const [open, setOpen] = useState(false);
   const handleClickOpen = () => {
@@ -21,6 +27,12 @@ const MyChats = () => {
   };
   const handleClose = () => {
     setOpen(false);
+  };
+  const handleSnackClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setSnackOpen(false);
   };
 
   const fetchChats = async () => {
@@ -33,7 +45,11 @@ const MyChats = () => {
       );
       dispatch(setChats({ chats: data }));
     } catch (error) {
-      alert(error.response.data);
+      setSnackBarProps({
+        color: "error",
+        message: error.response.data,
+      });
+      setSnackOpen(true);
     }
   };
 
@@ -81,6 +97,12 @@ const MyChats = () => {
       ) : (
         <CircularProgress sx={{ marginTop: "6rem" }} size={"4rem"}/>
       )}
+      <Toast
+        color={snackbarProps.color}
+        message={snackbarProps.message}
+        snackOpen={snackOpen}
+        handleSnackClose={handleSnackClose}
+      />
     </div>
   );
 };

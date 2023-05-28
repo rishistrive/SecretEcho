@@ -5,12 +5,7 @@ import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { setUser, setToken } from "@/redux";
 import CircularProgress from "@mui/material/CircularProgress";
-import Snackbar from "@mui/material/Snackbar";
-import MuiAlert from "@mui/material/Alert";
-
-const Alert = React.forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
+import Toast from "@/components/common/Toast";
 
 const LoginForm = () => {
   const router = useRouter();
@@ -126,20 +121,12 @@ const LoginForm = () => {
           "Login"
         )}
       </button>
-      <Snackbar
-        anchorOrigin={{ horizontal: "center", vertical: "bottom" }}
-        open={open}
-        autoHideDuration={6000}
-        onClose={handleClose}
-      >
-        <Alert
-          onClose={handleClose}
-          severity={snackbarProps.color}
-          sx={{ width: "100%" }}
-        >
-          {snackbarProps.message}
-        </Alert>
-      </Snackbar>
+      <Toast
+        color={snackbarProps.color}
+        message={snackbarProps.message}
+        snackOpen={open}
+        handleSnackClose={handleClose}
+      />
     </form>
   );
 };

@@ -15,6 +15,9 @@ import { setCurrentChat, setChats } from "@/redux";
 import styles from "../../../styles/Home.module.css";
 import axios from "axios";
 import UserListItem from "./UserListItem";
+import Toast from "@/components/common/Toast";
+import Skeleton from "@mui/material/Skeleton";
+import Stack from "@mui/material/Stack";
 
 const UpdateGroupChatModal = ({ open, handleClose }) => {
   const dispatch = useDispatch();
@@ -24,6 +27,12 @@ const UpdateGroupChatModal = ({ open, handleClose }) => {
   const [groupChatName, setGroupChatName] = useState("");
   const [search, setSearch] = useState("");
   const [searchResult, setSearchResult] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [snackOpen, setSnackOpen] = useState(false);
+  const [snackbarProps, setSnackBarProps] = useState({
+    color: "success",
+    message: "Snackbar message",
+  });
 
   const handleRename = async () => {
     if (!groupChatName) {
@@ -40,14 +49,21 @@ const UpdateGroupChatModal = ({ open, handleClose }) => {
         }
       );
       dispatch(setCurrentChat({ currentChat: data }));
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API}/api/chats`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API}/api/chats`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       dispatch(setChats({ chats: response.data }));
       setGroupChatName("");
     } catch (error) {
       console.log(error);
-      alert(error.response.data);
+      setSnackBarProps({
+        color: "error",
+        message: error.response.data,
+      });
+      setSnackOpen(true);
     }
   };
 
@@ -57,6 +73,7 @@ const UpdateGroupChatModal = ({ open, handleClose }) => {
       return;
     }
     try {
+      setLoading(true);
       const { data } = await axios.get(
         `${process.env.NEXT_PUBLIC_API}/api/user?search=${query}`,
         {
@@ -65,9 +82,15 @@ const UpdateGroupChatModal = ({ open, handleClose }) => {
           },
         }
       );
+      setLoading(false);
       setSearchResult(data);
     } catch (error) {
-      alert(error.response.data);
+      setLoading(false);
+      setSnackBarProps({
+        color: "error",
+        message: error.response.data,
+      });
+      setSnackOpen(true);
     }
   };
 
@@ -83,7 +106,11 @@ const UpdateGroupChatModal = ({ open, handleClose }) => {
         (item) => JSON.stringify(item) === JSON.stringify(user)
       )
     ) {
-      alert("User already exists in the group");
+      setSnackBarProps({
+        color: "error",
+        message: "User already exists in the group",
+      });
+      setSnackOpen(true);
       return;
     }
     try {
@@ -100,14 +127,21 @@ const UpdateGroupChatModal = ({ open, handleClose }) => {
         }
       );
       dispatch(setCurrentChat({ currentChat: data }));
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API}/api/chats`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API}/api/chats`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       dispatch(setChats({ chats: response.data }));
       setSearch("");
       setSearchResult([]);
     } catch (error) {
-      alert(error.response.data);
+      setSnackBarProps({
+        color: "error",
+        message: error.response.data,
+      });
+      setSnackOpen(true);
     }
   };
 
@@ -129,18 +163,29 @@ const UpdateGroupChatModal = ({ open, handleClose }) => {
         }
       );
       dispatch(setCurrentChat({ currentChat: data }));
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API}/api/chats`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API}/api/chats`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       dispatch(setChats({ chats: response.data }));
     } catch (error) {
-      alert(error.response.data);
+      setSnackBarProps({
+        color: "error",
+        message: error.response.data,
+      });
+      setSnackOpen(true);
     }
   };
 
   const leaveGroup = async () => {
     if (selectedChat.groupAdmin._id === loggedUser._id) {
-      alert("Group admin cannot leave group");
+      setSnackBarProps({
+        color: "error",
+        message: "Group admin cannot leave group",
+      });
+      setSnackOpen(true);
       return;
     }
     try {
@@ -157,14 +202,28 @@ const UpdateGroupChatModal = ({ open, handleClose }) => {
         }
       );
       dispatch(setCurrentChat({ currentChat: null }));
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API}/api/chats`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API}/api/chats`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       dispatch(setChats({ chats: response.data }));
       handleClose();
     } catch (error) {
-      alert(error.response.data);
+      setSnackBarProps({
+        color: "error",
+        message: error.response.data,
+      });
+      setSnackOpen(true);
     }
+  };
+
+  const handleSnackClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setSnackOpen(false);
   };
 
   return (
@@ -222,19 +281,41 @@ const UpdateGroupChatModal = ({ open, handleClose }) => {
               />
             </div>
           )}
-        {searchResult.slice(0, 4).map((user, index) => (
-          <UserListItem
-            key={index}
-            user={user}
-            handleFunction={handleAddUser}
-          />
-        ))}
+        {!loading ? (
+          searchResult
+            .slice(0, 4)
+            .map((user, index) => (
+              <UserListItem
+                key={index}
+                user={user}
+                handleFunction={handleAddUser}
+              />
+            ))
+        ) : (
+          <Stack spacing={0} marginLeft={1.5} marginRight={1.5}>
+            {Array(2)
+              .fill()
+              .map((_, index) => (
+                <Skeleton
+                  key={index}
+                  variant="text"
+                  sx={{ fontSize: "3rem" }}
+                />
+              ))}
+          </Stack>
+        )}
       </DialogContent>
       <DialogActions>
         <Button onClick={leaveGroup} variant="contained" color={"error"}>
           Leave Group
         </Button>
       </DialogActions>
+      <Toast
+        color={snackbarProps.color}
+        message={snackbarProps.message}
+        snackOpen={snackOpen}
+        handleSnackClose={handleSnackClose}
+      />
     </Dialog>
   );
 };
