@@ -5,6 +5,12 @@ import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { setUser, setToken } from "@/redux";
 import CircularProgress from "@mui/material/CircularProgress";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const LoginForm = () => {
   const router = useRouter();
@@ -15,6 +21,10 @@ const LoginForm = () => {
   });
   const [formErrors, setFormErrors] = useState({});
   const [loading, setLoading] = useState(false);
+  const [snackbarProps, setSnackBarProps] = useState({
+    color: "success",
+    message: "Snackbar message",
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -48,16 +58,33 @@ const LoginForm = () => {
           `${process.env.NEXT_PUBLIC_API}/api/user/login`,
           loginDetails
         );
-        alert(response.data.message);
+        setSnackBarProps({
+          color: "success",
+          message: response.data.message,
+        });
+        setOpen(true);
         dispatch(setUser({ user: response.data.user }));
         dispatch(setToken({ token: response.data.token }));
         setLoading(false);
         router.push("/");
       } catch (error) {
-        alert(error.response.data);
+        setSnackBarProps({
+          color: "error",
+          message: error.response.data,
+        });
+        setOpen(true);
         setLoading(false);
       }
     }
+  };
+
+  const [open, setOpen] = useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
   };
 
   return (
@@ -99,6 +126,20 @@ const LoginForm = () => {
           "Login"
         )}
       </button>
+      <Snackbar
+        anchorOrigin={{ horizontal: "center", vertical: "bottom" }}
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+      >
+        <Alert
+          onClose={handleClose}
+          severity={snackbarProps.color}
+          sx={{ width: "100%" }}
+        >
+          {snackbarProps.message}
+        </Alert>
+      </Snackbar>
     </form>
   );
 };
