@@ -4,6 +4,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { setUser, setToken } from "@/redux";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const SignupForm = () => {
   const router = useRouter();
@@ -68,8 +69,8 @@ const SignupForm = () => {
           formData
         );
         alert(response.data.message);
-        dispatch(setUser({user: response.data.user}));
-        dispatch(setToken({token: response.data.token}));
+        dispatch(setUser({ user: response.data.user }));
+        dispatch(setToken({ token: response.data.token }));
         setLoading(false);
         router.push("/");
       } catch (error) {
@@ -146,7 +147,11 @@ const SignupForm = () => {
         className={styles.form_button}
         onClick={handleSubmit}
       >
-        {loading ? "Loading..." : "Sign Up"}
+        {loading ? (
+          <CircularProgress color={"inherit"} size={"16px"} />
+        ) : (
+          "Sign Up"
+        )}
       </button>
     </form>
   );

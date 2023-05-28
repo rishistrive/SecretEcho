@@ -4,6 +4,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { setUser, setToken } from "@/redux";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const LoginForm = () => {
   const router = useRouter();
@@ -92,7 +93,11 @@ const LoginForm = () => {
         className={styles.form_button}
         onClick={handleSubmit}
       >
-        {loading ? "Loading..." : "Login"}
+        {loading ? (
+          <CircularProgress color={"inherit"} size={"16px"} />
+        ) : (
+          "Login"
+        )}
       </button>
     </form>
   );
