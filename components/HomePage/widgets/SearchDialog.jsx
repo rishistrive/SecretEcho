@@ -50,7 +50,15 @@ const SearchDialog = ({ openDialog, handleClose }) => {
     }
   };
   return (
-    <Drawer anchor="left" open={openDialog} onClose={handleClose}>
+    <Drawer
+      anchor="left"
+      open={openDialog}
+      onClose={() => {
+        handleClose();
+        setSearch("");
+        setSearchResult([]);
+      }}
+    >
       <span className={styles.dialog_heading}>Search User</span>
       <Divider />
       <div className={styles.search_input_container}>
