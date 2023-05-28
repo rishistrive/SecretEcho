@@ -29,6 +29,10 @@ server.use(
 dbConnect();
 require("./config/cloudinaryConfig");
 
+server.get("/api/warmup", (req, res) => {
+  console.log("Warmup request received");
+});
+
 server.use("/api/user", require("./routes/userRoutes"));
 server.use("/api/chats", require("./routes/chatRoutes"));
 server.use("/api/messages", require("./routes/messageRoutes"));
