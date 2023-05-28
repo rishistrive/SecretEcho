@@ -188,7 +188,7 @@ const SingleChat = () => {
           <div className={styles.select_chat_messagesBody}>
             <div className={styles.select_chat_messages}>
               {loading ? (
-                <CircularProgress color={"inherit"} />
+                <CircularProgress sx={{ marginTop: "10rem" }} size={"4rem"} />
               ) : (
                 <SingleChatMessages messages={messages} istyping={istyping} />
               )}

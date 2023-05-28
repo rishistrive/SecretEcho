@@ -5,6 +5,7 @@ import { setChats, setCurrentChat } from "@/redux";
 import styles from "@/styles/Home.module.css";
 import AddIcon from "@mui/icons-material/Add";
 import GroupChatDialog from "./GroupChatDialog";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const MyChats = () => {
   const dispatch = useDispatch();
@@ -24,9 +25,12 @@ const MyChats = () => {
 
   const fetchChats = async () => {
     try {
-      const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API}/api/chats`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const { data } = await axios.get(
+        `${process.env.NEXT_PUBLIC_API}/api/chats`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       dispatch(setChats({ chats: data }));
     } catch (error) {
       alert(error.response.data);
@@ -51,7 +55,7 @@ const MyChats = () => {
         </button>
       </div>
       <GroupChatDialog open={open} handleClose={handleClose} />
-      {chats && (
+      {chats ? (
         <div className={styles.mychats_body}>
           {chats.map((chat, index) => (
             <div
@@ -74,6 +78,8 @@ const MyChats = () => {
             </div>
           ))}
         </div>
+      ) : (
+        <CircularProgress sx={{ marginTop: "6rem" }} size={"4rem"}/>
       )}
     </div>
   );
