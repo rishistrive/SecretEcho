@@ -2,7 +2,7 @@
 
 ---
 
-A Fullstack, chat application with real time communication built using ReactJS, NextJS, MongoDB and Socket.IO.
+A Fullstack chat application with real time communication built using ReactJS, NextJS, MongoDB and Socket.IO.
 
 > Portfolio project, Open to contributions
 
