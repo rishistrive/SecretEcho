@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <>
       <Head>
-        <title>Chit Chat</title>
+        <title>SecretEcho</title>
       </Head>
       <HomePage />
     </>

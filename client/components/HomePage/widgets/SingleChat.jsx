@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setCurrentChat, setNotifications } from "@/redux";
 import styles from "@/styles/Home.module.css";
 import IconButton from "@mui/material/IconButton";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import ProfileModal from "./ProfileModal";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import UpdateGroupChatModal from "./UpdateGroupChatModal";
-import SendIcon from "@mui/icons-material/Send";
-import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
-import SingleChatMessages from "./SingleChatMessages";
+import SendIcon from "@mui/icons-material/Send";
 import { io } from "socket.io-client";
+import axios from "axios";
+
+import ProfileModal from "./ProfileModal";
+import UpdateGroupChatModal from "./UpdateGroupChatModal";
+import SingleChatMessages from "./SingleChatMessages";
 import Toast from "@/components/common/Toast";
 
-const ENDPOINT = `${process.env.NEXT_PUBLIC_API}`;
-var socket, selectedChatCompare;
+const ENDPOINT = process.env.NEXT_PUBLIC_API;
 
 const SingleChat = () => {
   const dispatch = useDispatch();
@@ -23,223 +23,146 @@ const SingleChat = () => {
   const loggedUser = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
   const notifications = useSelector((state) => state.notifications);
-  const [openModal, setOpenModal] = useState(false);
-  const [openModal2, setOpenModal2] = useState(false);
-  const [chatSender, setChatSender] = useState(null);
+
+  const socket = useRef(null);
+  const selectedChatCompare = useRef(null);
+  const typingTimeoutRef = useRef(null);
+
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const [socketConnection, setSocketConnection] = useState(false);
   const [typing, setTyping] = useState(false);
-  const [istyping, setIsTyping] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
+  const [chatSender, setChatSender] = useState(null);
+  const [openModal, setOpenModal] = useState(false);
+  const [openModal2, setOpenModal2] = useState(false);
   const [snackOpen, setSnackOpen] = useState(false);
-  const [snackbarProps, setSnackBarProps] = useState({
-    color: "success",
-    message: "Snackbar message",
-  });
-
-  const handleSnackClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setSnackOpen(false);
-  };
+  const [snackbarProps, setSnackbarProps] = useState({ color: "success", message: "" });
 
   useEffect(() => {
-    socket = io(ENDPOINT);
-    socket.emit("setup", loggedUser);
-    socket.on("connected", () => setSocketConnection(true));
-    socket.on("message received", (newMessageReceived) => {
-      if (
-        !selectedChatCompare ||
-        selectedChatCompare._id !== newMessageReceived.chat._id
-      ) {
-        // give notification
-        if (!notifications.includes(newMessageReceived)) {
-          dispatch(
-            setNotifications({
-              notifications: [newMessageReceived, ...notifications],
-            })
-          );
+    socket.current = io(ENDPOINT);
+    socket.current.emit("setup", loggedUser);
+    socket.current.on("connected", () => {""});
+
+    socket.current.on("message received", (newMessageReceived) => {
+      if (!selectedChatCompare.current || selectedChatCompare.current._id !== newMessageReceived.chat._id) {
+        if (!notifications?.some((n) => n._id === newMessageReceived._id)) {
+          dispatch(setNotifications({ notifications: [newMessageReceived, ...notifications] }));
         }
       } else {
-        setMessages((prevValue) => {
-          return [...prevValue, newMessageReceived];
-        });
+        setMessages((prev) => [...prev, newMessageReceived]);
       }
     });
-    socket.on("typing", () => {
-      setIsTyping(true);
-    });
-    socket.on("stop typing", () => {
-      setIsTyping(false);
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
-  const handleSubmit = async () => {
-    setNewMessage("");
-    socket.emit("stop typing", selectedChat._id);
-    if (!newMessage) return;
-    try {
-      const { data } = await axios.post(
-        `${process.env.NEXT_PUBLIC_API}/api/messages`,
-        {
-          content: newMessage,
-          chatId: selectedChat._id,
-        },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      setMessages((prevValue) => {
-        return [...prevValue, data];
-      });
-      socket.emit("new message", data);
-    } catch (error) {
-      setSnackBarProps({
-        color: "error",
-        message: error.response.data,
-      });
-      setSnackOpen(true);
-    }
-  };
+    socket.current.on("typing", () => setIsTyping(true));
+    socket.current.on("stop typing", () => setIsTyping(false));
 
-  const fetchChatMessages = async () => {
-    setLoading(true);
-    try {
-      const { data } = await axios.get(
-        `${process.env.NEXT_PUBLIC_API}/api/messages/${selectedChat._id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      setMessages(data);
-      setLoading(false);
-      socket.emit("join chat", selectedChat._id);
-    } catch (error) {
-      console.log(error);
-      setSnackBarProps({
-        color: "error",
-        message: error.response.data,
-      });
-      setSnackOpen(true);
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    selectedChat && fetchChatMessages();
-    setNewMessage("");
-    selectedChatCompare = selectedChat;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedChat]);
+    return () => {
+      socket.current.disconnect();
+    };
+  }, [dispatch, loggedUser, notifications]);
 
   useEffect(() => {
     if (selectedChat) {
-      setChatSender(
-        !selectedChat.isGroupChat
-          ? selectedChat.users.filter((user) => user._id !== loggedUser._id)[0]
-          : null
-      );
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedChat]);
+      fetchMessages();
+      selectedChatCompare.current = selectedChat;
 
-  const handleType = (e) => {
+      if (!selectedChat.isGroupChat) {
+        const sender = selectedChat.users.find((u) => u._id !== loggedUser._id);
+        setChatSender(sender);
+      }
+    }
+    setNewMessage("");
+  }, [selectedChat, loggedUser]);
+
+  const fetchMessages = async () => {
+    if (!selectedChat) return;
+    setLoading(true);
+    try {
+      const { data } = await axios.get(`${ENDPOINT}/api/messages/${selectedChat._id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setMessages(data);
+      socket.current.emit("join chat", selectedChat._id);
+    } catch (error) {
+      setSnackbarProps({ color: "error", message: error.response?.data || "Error loading messages" });
+      setSnackOpen(true);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSubmit = async () => {
+    if (!newMessage.trim() || !socket.current) return;
+    socket.current.emit("stop typing", selectedChat._id);
+    try {
+      const { data } = await axios.post(`${ENDPOINT}/api/messages`, {
+        content: newMessage,
+        chatId: selectedChat._id,
+      }, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setMessages([...messages, data]);
+      socket.current.emit("new message", data);
+      setNewMessage("");
+    } catch (error) {
+      setSnackbarProps({ color: "error", message: error.response?.data || "Failed to send message" });
+      setSnackOpen(true);
+    }
+  };
+
+  const handleTyping = (e) => {
     setNewMessage(e.target.value);
-    if (!socketConnection) return;
+    if (!socket.current || !selectedChat) return;
+
     if (!typing) {
       setTyping(true);
-      socket.emit("typing", selectedChat._id);
+      socket.current.emit("typing", selectedChat._id);
     }
-    let lastTypingTime = new Date().getTime();
-    var timerLength = 3000;
-    setTimeout(() => {
-      var timeNow = new Date().getTime();
-      var timeDiff = timeNow - lastTypingTime;
-      if (timeDiff >= timerLength && typing) {
-        socket.emit("stop typing", selectedChat._id);
-        setTyping(false);
-      }
-    }, timerLength);
+
+    if (typingTimeoutRef.current) clearTimeout(typingTimeoutRef.current);
+    typingTimeoutRef.current = setTimeout(() => {
+      socket.current.emit("stop typing", selectedChat._id);
+      setTyping(false);
+    }, 3000);
   };
 
   return (
-    <div
-      className={`${styles.chatbox_container} ${
-        !selectedChat && styles.hidden_container
-      }`}
-    >
+    <div className={`${styles.chatbox_container} ${!selectedChat && styles.hidden_container}`}>
       {selectedChat ? (
         <>
           <div className={styles.select_chat_heading}>
-            <IconButton
-              onClick={() => dispatch(setCurrentChat({ currentChat: null }))}
-            >
-              <ArrowBackIcon />
+            <IconButton onClick={() => dispatch(setCurrentChat({ currentChat: null }))}><ArrowBackIcon /></IconButton>
+            <span>{selectedChat.isGroupChat ? selectedChat.chatName : chatSender?.name}</span>
+            <IconButton onClick={() => selectedChat.isGroupChat ? setOpenModal2(true) : setOpenModal(true)}>
+              <VisibilityIcon />
             </IconButton>
-            {!selectedChat.isGroupChat ? (
-              <span>{chatSender && chatSender.name}</span>
-            ) : (
-              <span>{selectedChat.chatName}</span>
-            )}
-            {!selectedChat.isGroupChat ? (
-              <IconButton onClick={() => setOpenModal(true)}>
-                <VisibilityIcon />
-              </IconButton>
-            ) : (
-              <IconButton onClick={() => setOpenModal2(true)}>
-                <VisibilityIcon />
-              </IconButton>
-            )}
-            {chatSender && (
-              <ProfileModal
-                open={openModal}
-                handleClose={() => setOpenModal(false)}
-                image={chatSender.pic}
-                email={chatSender.email}
-              />
-            )}
-            <UpdateGroupChatModal
-              open={openModal2}
-              handleClose={() => setOpenModal2(false)}
-            />
           </div>
+
           <div className={styles.select_chat_messagesBody}>
-            <div className={styles.select_chat_messages}>
-              {loading ? (
-                <CircularProgress sx={{ marginTop: "10rem" }} size={"4rem"} />
-              ) : (
-                <SingleChatMessages messages={messages} istyping={istyping} />
-              )}
-            </div>
+            {loading ? (
+              <CircularProgress sx={{ marginTop: "10rem" }} size={"4rem"} />
+            ) : (
+              <SingleChatMessages messages={messages} istyping={isTyping} />
+            )}
             <div className={styles.select_chat_sendMessage}>
-              <input
-                type="text"
-                placeholder="Enter message here"
-                value={newMessage}
-                onChange={handleType}
-              />
-              <button onClick={handleSubmit}>
-                <SendIcon />
-              </button>
+              <input type="text" placeholder="Enter message here" value={newMessage} onChange={handleTyping} />
+              <button onClick={handleSubmit}><SendIcon /></button>
             </div>
           </div>
+
+          {chatSender && (
+            <ProfileModal open={openModal} handleClose={() => setOpenModal(false)} image={chatSender.pic} email={chatSender.email} />
+          )}
+          <UpdateGroupChatModal open={openModal2} handleClose={() => setOpenModal2(false)} />
         </>
       ) : (
         <div className={styles.select_chat_message}>
-          <span className={styles.select_chat_messageText}>
-            Click on a user to start chatting
-          </span>
+          <span className={styles.select_chat_messageText}>Click on a user to start chatting</span>
         </div>
       )}
-      <Toast
-        color={snackbarProps.color}
-        message={snackbarProps.message}
-        snackOpen={snackOpen}
-        handleSnackClose={handleSnackClose}
-      />
+
+      <Toast color={snackbarProps.color} message={snackbarProps.message} snackOpen={snackOpen} handleSnackClose={() => setSnackOpen(false)} />
     </div>
   );
 };

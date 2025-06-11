@@ -107,7 +107,7 @@ const GroupChatDialog = ({ open, handleClose }) => {
         justifyContent={"center"}
       >
         <div className={styles.groupchat_title}>
-          <span>Create Group Chat</span>
+          <span style={{fontSize:"20px",textAlign:'center'}}>Create Group Chat</span>
           <IconButton onClick={closeModal}>
             <CloseIcon />
           </IconButton>
@@ -182,7 +182,7 @@ const GroupChatDialog = ({ open, handleClose }) => {
         )}
       </DialogContent>
       <DialogActions>
-        <Button variant="contained" onClick={handleSubmit}>
+        <Button style={{backgroundColor:'#25d366'}} variant="contained" onClick={handleSubmit}>
           Create chat
         </Button>
       </DialogActions>

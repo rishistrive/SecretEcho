@@ -8,7 +8,7 @@ const LoginPage = () => {
   return (
     <div className={styles.login_page}>
       <div className={styles.title_container}>
-        <span className={styles.title_text}>Chit Chat</span>
+        <span className={styles.title_text}>SecretEcho </span>
       </div>
       <div className={styles.login_container}>
         <div className={styles.choose_tab_container}>

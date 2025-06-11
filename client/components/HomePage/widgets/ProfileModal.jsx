@@ -31,7 +31,7 @@ const ProfileModal = ({ open, handleClose, image, email }) => {
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button variant="contained" onClick={handleClose}>
+        <Button style={{backgroundColor:'#25d366'}} variant="contained" onClick={handleClose}>
           Close
         </Button>
       </DialogActions>

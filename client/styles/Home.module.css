@@ -4,6 +4,7 @@
 .chats_chatbox_container {
   display: flex;
   justify-content: space-between;
+  background-color: #25d366 ;
   padding: 10px;
   height: 91.5vh;
   gap: 3rem;
@@ -147,7 +148,7 @@
   margin: 10px 0;
 }
 .mychats_selectedChat {
-  background-color: #38b2ac !important;
+  background-color: #25d366 !important;
   color: white !important;
 }
 
@@ -156,6 +157,7 @@
   display: flex;
   justify-content: space-between;
   gap: 10rem;
+  font-size: 23px;
 }
 .groupchat_form {
   display: flex;
@@ -173,7 +175,7 @@
   padding: 10px;
   border-radius: 10px;
   margin: 10px;
-  background-color: purple;
+  background-color: #25d366;
   color: white;
   cursor: pointer;
   display: flex;
@@ -203,10 +205,10 @@
 .select_chat_messageText {
   font-family: "Work Sans";
   padding-bottom: 12px;
-  font-size: 30px;
+  font-size: 25;
 }
 .select_chat_heading {
-  font-size: 30px;
+  font-size: 23px;
   padding: 0 8px 12px;
   width: 100%;
   font-family: "Work Sans";

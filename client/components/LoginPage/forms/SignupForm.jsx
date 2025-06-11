@@ -88,13 +88,17 @@ const SignupForm = () => {
         setLoading(false);
         router.push("/");
       } catch (error) {
+        const fallbackMessage = "Something went wrong. Please try again.";
+      
         setSnackBarProps({
           color: "error",
-          message: error.response.data,
+          message: error.response?.data?.message || fallbackMessage,
         });
+      
         setOpen(true);
         setLoading(false);
       }
+      
     }
   };
 

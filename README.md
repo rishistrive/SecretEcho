@@ -1,13 +1,12 @@
-# Chit Chat MERN
+# SecretEcho 
 
 ---
-
 A Fullstack chat application with real time communication built using ReactJS, NextJS, MongoDB and Socket.IO.
 
 > Portfolio project, Open to contributions
 
 You can view the project here:
-https://chitchat519.netlify.app/
+
 
 ## Technologies used
 
@@ -64,14 +63,19 @@ If you want to run the app locally, you need:
 npm install
 ```
 
-3. Create a MongoDB database, either local or using [MongoDB Atlas](https://www.mongodb.com/atlas) in order to get the connection string.
-4. Create a `.env` file in the root folder and add the following:
+3. Install MongoDB and MongoDB Compass.
+Open Compass → Click "Create Database" → Enter:
+Database Name: chit-chat-app
+Collection Name: users
+Use the local connection string in your .env file:
 
-```
+
+
+4. Create a `.env` file in the root folder and add the following:
 JWT_SECRET_KEY=AnySecretKeyForJWT
 MONGODB_URL=MongodbUrlConnectionString
 NODE_ENV=development
-PORT=3000
+PORT=4000
 NEXT_PUBLIC_API=http://localhost:3000
 CLIENT_URL=http://localhost:3000
 CLOUDINARY_CLOUD_NAME=cloudinaryCloudName

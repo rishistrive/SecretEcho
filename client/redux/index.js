@@ -4,7 +4,7 @@ const initialState = {
   user: null,
   token: null,
   currentChat: null,
-  chats: null,
+  chats: [], 
   notifications: [],
 };
 
@@ -22,7 +22,8 @@ const authSlice = createSlice({
       state.user = null;
       state.token = null;
       state.currentChat = null;
-      state.chats = null;
+      state.chats = [];
+      state.notifications = [];
     },
     setCurrentChat: (state, action) => {
       state.currentChat = action.payload.currentChat;
@@ -30,8 +31,21 @@ const authSlice = createSlice({
     setChats: (state, action) => {
       state.chats = action.payload.chats;
     },
+    addChat: (state, action) => {
+      const newChat = action.payload.chat;
+      const exists = state.chats.find((c) => c._id === newChat._id);
+      if (!exists) {
+        state.chats.unshift(newChat); // add new chat to the top
+      }
+    },
     setNotifications: (state, action) => {
-      state.notifications = action.payload.notifications
+      state.notifications = action.payload.notifications;
+    },
+    addNotification: (state, action) => {
+      state.notifications.unshift(action.payload); // latest notification first
+    },
+    clearNotifications: (state) => {
+      state.notifications = [];
     },
   },
 });
@@ -39,9 +53,13 @@ const authSlice = createSlice({
 export const {
   setUser,
   setToken,
+  setLogout,
   setCurrentChat,
   setChats,
-  setLogout,
+  addChat,
   setNotifications,
+  addNotification,
+  clearNotifications,
 } = authSlice.actions;
+
 export default authSlice.reducer;

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import styles from "@/styles/Home.module.css";
 import {
   Avatar,
@@ -67,7 +68,7 @@ const Header = () => {
         openDialog={openDialog}
         handleClose={() => setOpenDialog(false)}
       />
-      <span className={styles.app_title}>Chit Chat</span>
+      <span className={styles.app_title}>SecretEcho</span>
       <div className={styles.menu_buttons_container}>
         <IconButton
           color="primary"
