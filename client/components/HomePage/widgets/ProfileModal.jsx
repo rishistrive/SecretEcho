@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+
 import {
   Button,
   Dialog,
@@ -7,8 +7,9 @@ import {
   DialogContentText,
   DialogTitle,
 } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 import styles from "../../../styles/Home.module.css";
+import Image from "next/image";
 
 const ProfileModal = ({ open, handleClose, image, email }) => {
   return (
@@ -25,13 +26,25 @@ const ProfileModal = ({ open, handleClose, image, email }) => {
           alignItems: "center",
         }}
       >
-        <img className={styles.profile_image} src={image} alt="User image" />
+        <div className={styles.profile_image}>
+          <Image
+            src={image}
+            alt="User image"
+            width={120}
+            height={120}
+            style={{ borderRadius: "50%", objectFit: "cover" }}
+          />
+        </div>
         <DialogContentText sx={{ mt: 3, fontSize: "23px" }}>
           Email: {email}
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button style={{backgroundColor:'#25d366'}} variant="contained" onClick={handleClose}>
+        <Button
+          style={{ backgroundColor: "#25d366" }}
+          variant="contained"
+          onClick={handleClose}
+        >
           Close
         </Button>
       </DialogActions>
