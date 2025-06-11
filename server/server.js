@@ -44,7 +44,7 @@ server.use("/api/chats", require("./routes/chatRoutes"));
 server.use("/api/messages", require("./routes/messageRoutes"));
 
 // Start Express Server
-const appServer = server.listen(PORT, () => {
+const appServer = server.listen(PORT,'0.0.0.0', () => {
   console.log(` Server running on http://localhost:${PORT}`);
 });
 
