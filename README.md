@@ -62,15 +62,11 @@ If you want to run the app locally, you need:
 npm install
 ```
 
-3. Install MongoDB and MongoDB Compass.
-Open Compass → Click "Create Database" → Enter:
-Database Name: chit-chat-app
-Collection Name: users
-Use the local connection string in your .env file:
 
 
 
-4. Create a `.env` file in the root folder and add the following:
+
+3. Create a `.env` file in the root folder and add the following:
 JWT_SECRET_KEY=AnySecretKeyForJWT
 MONGODB_URL=MongodbUrlConnectionString
 NODE_ENV=development
