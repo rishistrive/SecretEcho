@@ -22,13 +22,13 @@ const HomePage = () => {
     if (!user || !token) {
       router.replace("/login");
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+   
   }, [user]);
 
   useEffect(() => {
     warmupRequest();
     dispatch(setCurrentChat({ currentChat: null }));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    
   }, []);
 
   return (

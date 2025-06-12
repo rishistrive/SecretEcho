@@ -9,11 +9,16 @@ import CircularProgress from "@mui/material/CircularProgress";
 import SendIcon from "@mui/icons-material/Send";
 import { io } from "socket.io-client";
 import axios from "axios";
+import dynamic from "next/dynamic";
 
 import ProfileModal from "./ProfileModal";
 import UpdateGroupChatModal from "./UpdateGroupChatModal";
-import SingleChatMessages from "./SingleChatMessages";
 import Toast from "@/components/common/Toast";
+
+// ✅ Dynamically import SingleChatMessages with SSR disabled
+const SingleChatMessages = dynamic(() => import("./SingleChatMessages"), {
+  ssr: false,
+});
 
 const ENDPOINT = process.env.NEXT_PUBLIC_API;
 
@@ -42,7 +47,7 @@ const SingleChat = () => {
   useEffect(() => {
     socket.current = io(ENDPOINT);
     socket.current.emit("setup", loggedUser);
-    socket.current.on("connected", () => {""});
+    socket.current.on("connected", () => {});
 
     socket.current.on("message received", (newMessageReceived) => {
       if (!selectedChatCompare.current || selectedChatCompare.current._id !== newMessageReceived.chat._id) {
@@ -132,7 +137,9 @@ const SingleChat = () => {
       {selectedChat ? (
         <>
           <div className={styles.select_chat_heading}>
-            <IconButton onClick={() => dispatch(setCurrentChat({ currentChat: null }))}><ArrowBackIcon /></IconButton>
+            <IconButton onClick={() => dispatch(setCurrentChat({ currentChat: null }))}>
+              <ArrowBackIcon />
+            </IconButton>
             <span>{selectedChat.isGroupChat ? selectedChat.chatName : chatSender?.name}</span>
             <IconButton onClick={() => selectedChat.isGroupChat ? setOpenModal2(true) : setOpenModal(true)}>
               <VisibilityIcon />
@@ -146,23 +153,39 @@ const SingleChat = () => {
               <SingleChatMessages messages={messages} istyping={isTyping} />
             )}
             <div className={styles.select_chat_sendMessage}>
-              <input type="text" placeholder="Enter message here" value={newMessage} onChange={handleTyping} />
+              <input
+                type="text"
+                placeholder="Enter message here"
+                value={newMessage}
+                onChange={handleTyping}
+              />
               <button onClick={handleSubmit}><SendIcon /></button>
             </div>
           </div>
 
           {chatSender && (
-            <ProfileModal open={openModal} handleClose={() => setOpenModal(false)} image={chatSender.pic} email={chatSender.email} />
+            <ProfileModal
+              open={openModal}
+              handleClose={() => setOpenModal(false)}
+              image={chatSender.pic}
+              email={chatSender.email}
+            />
           )}
           <UpdateGroupChatModal open={openModal2} handleClose={() => setOpenModal2(false)} />
         </>
       ) : (
         <div className={styles.select_chat_message}>
-          <span className={styles.select_chat_messageText}>Click on a user to start chatting</span>
+          <span className={styles.select_chat_messageText}>
+            Click on a user to start chatting
+          </span>
         </div>
       )}
-
-      <Toast color={snackbarProps.color} message={snackbarProps.message} snackOpen={snackOpen} handleSnackClose={() => setSnackOpen(false)} />
+      <Toast
+        color={snackbarProps.color}
+        message={snackbarProps.message}
+        snackOpen={snackOpen}
+        handleSnackClose={() => setSnackOpen(false)}
+      />
     </div>
   );
 };
